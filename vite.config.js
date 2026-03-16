@@ -6,6 +6,7 @@ export default defineConfig({
     outDir: 'dist',
     rollupOptions: {
       input: { popup: 'popup.html' },
+      // TODO: Re-enable for ExtensionPay: background: 'src/background.js'
       output: {
         entryFileNames: (chunkInfo) => {
           if (chunkInfo.name === 'background') return '[name].js';

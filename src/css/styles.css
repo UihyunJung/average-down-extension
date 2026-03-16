@@ -391,6 +391,12 @@ body {
   font-size: 12px;
   text-align: center;
   font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.upgrade-banner:hover {
+  opacity: 0.85;
 }
 
 .upgrade-banner.visible {

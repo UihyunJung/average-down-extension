@@ -1,3 +1,7 @@
 node_modules
 dist
 .DS_Store
+*.secret
+*.backup_code*
+stripe_backup_code*
+.playwright-mcp/

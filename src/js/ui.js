@@ -9,6 +9,8 @@ import {
   formatRate,
 } from './calculator.js';
 import { loadState, debouncedSave, flushPendingSave, saveState } from './storage.js';
+// TODO: Re-enable when ExtensionPay Stripe Connect supports South Korea
+// import { checkPremium, openPaymentPage, onPaidStatusChange } from './subscription.js';
 
 // State
 let currency = 'USD';
@@ -232,6 +234,9 @@ function bindInputEvents() {
     immediateSave();
   });
 
+  // TODO: Re-enable when ExtensionPay Stripe Connect supports South Korea
+  // els.upgradeBanner.addEventListener('click', () => { openPaymentPage(); });
+
   // Flush on popup close
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') {
@@ -302,13 +307,11 @@ async function init() {
     els.sliderInput.value = additionalQuantity || '';
   }
 
-  // Premium: Phase 5에서 ExtensionPay 연동 시 교체
-  // 개발 중 프리미엄 테스트: VITE_UNLOCK_PREMIUM=true npm run dev
-  if (import.meta.env.VITE_UNLOCK_PREMIUM === 'true') {
-    isPremium = true;
-  }
+  // TODO: Re-enable when ExtensionPay Stripe Connect supports South Korea
+  // isPremium = await checkPremium();
+  // onPaidStatusChange(() => { isPremium = true; updateCurrencyDropdown(); hideUpgradeBanner(); });
 
-  // Verify saved currency is accessible
+  // Verify saved currency is accessible (free version: USD only)
   if (currencyConfig[currency]?.premium && !isPremium) {
     currency = 'USD';
   }
