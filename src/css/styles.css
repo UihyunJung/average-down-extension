@@ -60,13 +60,17 @@ body {
 /* Header */
 .header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
 }
 
 .header h1 {
   font-size: 16px;
   font-weight: 700;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .header-controls {
