@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./src/css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1 data-i18n="title">Average Down Calculator</h1>
+      <div class="header-controls">
+        <select id="lang-select" class="lang-select" data-i18n-aria="language">
+          <option value="en">EN</option>
+          <option value="ko">한국어</option>
+          <option value="ja">日本語</option>
+        </select>
+        <select id="currency-select" class="lang-select" data-i18n-aria="currency">
+          <option value="USD">USD ($)</option>
+          <option value="KRW">KRW (₩) 🔒</option>
+          <option value="JPY">JPY (¥) 🔒</option>
+          <option value="EUR">EUR (€) 🔒</option>
+          <option value="GBP">GBP (£) 🔒</option>
+        </select>
+        <button id="btn-reset" class="btn-reset" data-i18n="reset">Reset</button>
+      </div>
+    </div>
+
+    <!-- Input Section -->
+    <div class="card">
+      <h2 class="card-title" data-i18n="inputSection">Stock Information</h2>
+
+      <div class="input-group">
+        <label class="input-label" for="input-avg-price" data-i18n="avgPrice">Average Purchase Price</label>
+        <div class="input-wrapper">
+          <input id="input-avg-price" class="input-field" type="text" inputmode="decimal" placeholder="150.00">
+          <span id="unit-avg-price" class="input-unit">$</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label class="input-label" for="input-current-price" data-i18n="currentPrice">Current Price</label>
+        <div class="input-wrapper">
+          <input id="input-current-price" class="input-field" type="text" inputmode="decimal" placeholder="120.00">
+          <span id="unit-current-price" class="input-unit">$</span>
+        </div>
+      </div>
+
+      <p id="input-hint" class="input-hint" data-i18n="inputHint">Use period (.) as decimal separator</p>
+
+      <div class="input-group">
+        <label class="input-label" for="input-quantity" data-i18n="sharesOwned">Shares Owned</label>
+        <div class="input-wrapper">
+          <input id="input-quantity" class="input-field" type="text" inputmode="numeric" placeholder="100">
+          <span id="unit-quantity" class="input-unit" data-i18n="shares">shares</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider Section -->
+    <div id="slider-section" class="card slider-section">
+      <h2 class="card-title" data-i18n="additionalShares">Additional Shares to Buy</h2>
+      <input id="slider" class="slider-range" type="range" min="0" max="100" step="1" value="0" data-i18n-aria="additionalShares">
+      <div class="slider-controls">
+        <span class="slider-min">0</span>
+        <div class="slider-input-wrapper">
+          <input id="slider-input" class="slider-input" type="text" inputmode="numeric" placeholder="0" data-i18n-aria="additionalShares">
+          <span class="slider-unit" data-i18n="shares">shares</span>
+        </div>
+        <span id="slider-max" class="slider-max">100</span>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results-section" class="results-section" aria-live="polite">
+      <h2 class="card-title" data-i18n="results">Results</h2>
+
+      <div class="rate-comparison">
+        <div class="rate-item">
+          <p class="rate-label" data-i18n="before">Before</p>
+          <p id="rate-before" class="rate-value">—</p>
+        </div>
+        <div class="rate-arrow" aria-hidden="true">→</div>
+        <div class="rate-item">
+          <p class="rate-label" data-i18n="after">After</p>
+          <p id="rate-after" class="rate-value">—</p>
+        </div>
+      </div>
+
+      <div class="new-avg-card">
+        <p class="new-avg-label" data-i18n="newAvgPrice">New Average Price</p>
+        <p id="new-avg-value" class="new-avg-value">—</p>
+      </div>
+
+      <div class="details-grid">
+        <div class="detail-item">
+          <p class="detail-label" data-i18n="totalShares">Total Shares</p>
+          <p id="total-shares" class="detail-value">—</p>
+        </div>
+        <div class="detail-item">
+          <p class="detail-label" data-i18n="totalInvestment">Total Investment</p>
+          <p id="total-investment" class="detail-value">—</p>
+        </div>
+        <div class="detail-item full-width">
+          <p class="detail-label" data-i18n="additionalInvestment">Additional Investment</p>
+          <p id="additional-investment" class="detail-value">—</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upgrade Banner -->
+    <div id="upgrade-banner" class="upgrade-banner">
+      <span data-i18n="upgradeDesc">Unlock additional currencies for $1/month</span>
+    </div>
+
+    <!-- How to Use -->
+    <details class="how-to-use">
+      <summary data-i18n="howToUse">How to Use</summary>
+      <div class="how-to-steps">
+        <div class="how-to-step">
+          <span class="step-number">1.</span>
+          <span data-i18n="howToStep1">Enter average price, current price, and shares owned.</span>
+        </div>
+        <div class="how-to-step">
+          <span class="step-number">2.</span>
+          <span data-i18n="howToStep2">Adjust additional shares with the slider.</span>
+        </div>
+        <div class="how-to-step">
+          <span class="step-number">3.</span>
+          <span data-i18n="howToStep3">Check the new average price and return rate change.</span>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <script type="module" src="./src/js/ui.js"></script>
+</body>
+</html>

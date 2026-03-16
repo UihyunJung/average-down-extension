@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "주식 물타기 계산기"
+  },
+  "extDescription": {
+    "message": "추가 매수 시 새로운 평균단가와 수익률 변화를 계산합니다"
+  }
+}

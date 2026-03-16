@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "株式ナンピン計算機"
+  },
+  "extDescription": {
+    "message": "追加購入時の新しい平均取得単価と収益率の変化を計算します"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Stock Average Down Calculator"
+  },
+  "extDescription": {
+    "message": "Calculate new average stock price when averaging down"
+  }
+}
