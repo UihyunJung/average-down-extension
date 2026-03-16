@@ -5,3 +5,4 @@ dist
 *.backup_code*
 stripe_backup_code*
 .playwright-mcp/
+*.zip
