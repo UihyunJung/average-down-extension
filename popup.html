@@ -30,7 +30,6 @@
         <option value="CNY">CNY (¥) 🔒</option>
       </select>
       <button id="btn-status-badge" class="status-badge status-free" data-i18n="free">Free</button>
-      <button id="btn-reset" class="btn-reset"><span class="reset-icon">↻</span> <span data-i18n="reset">Reset</span></button>
     </div>
 
     <!-- Upgrade Panel (toggle by badge click) -->
@@ -69,7 +68,10 @@
 
     <!-- Input Section -->
     <div class="card">
-      <h2 class="card-title" data-i18n="inputSection">Stock Information</h2>
+      <div class="card-header">
+        <h2 class="card-title" data-i18n="inputSection">Stock Information</h2>
+        <button id="btn-reset" class="btn-reset"><span class="reset-icon">↻</span> <span data-i18n="reset">Reset</span></button>
+      </div>
 
       <div class="input-group">
         <label class="input-label" for="input-avg-price" data-i18n="avgPrice">Average Purchase Price</label>
