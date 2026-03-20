@@ -3,6 +3,6 @@
     "message": "Stock Average Down Calculator"
   },
   "extDescription": {
-    "message": "Calculate new average stock price when averaging down"
+    "message": "Calculate new average stock price when averaging down. DCA cost basis calculator with multi-currency support and return rate analysis."
   }
 }
