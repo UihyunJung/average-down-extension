@@ -125,19 +125,20 @@ function updatePremiumUI() {
     else if (planType === 'year') label = t('annualLabel');
 
     let badgeText = '✓ ' + label;
+    let dateStr = '';
     if (expiresAt) {
       const d = new Date(expiresAt);
-      const dateStr = (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
-      const suffix = subStatus === 'canceled' ? t('expires') : t('renews');
-      badgeText += ' · ' + dateStr + ' ' + suffix;
+      if (!isNaN(d.getTime())) {
+        dateStr = (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
+        const suffix = subStatus === 'canceled' ? t('expires') : t('renews');
+        badgeText += ' · ' + dateStr + ' ' + suffix;
+      }
     }
     els.statusBadge.textContent = badgeText;
     els.statusBadge.className = 'status-badge status-pro';
     els.upgradePanel.classList.remove('visible');
 
-    if (subStatus === 'canceled' && expiresAt) {
-      const d = new Date(expiresAt);
-      const dateStr = (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
+    if (subStatus === 'canceled' && dateStr) {
       els.proPanelText.textContent = t('canceledNotice').replace('{date}', dateStr);
     } else {
       els.proPanelText.textContent = t('autoRenewNotice');
@@ -492,15 +493,15 @@ async function init() {
     currency = 'USD';
   }
   els.currencySelect.value = currency;
-  updatePremiumUI();
 
-  // Language
+  // Language (updatePremiumUI보다 먼저 설정 — 뱃지 텍스트가 올바른 언어로 렌더되도록)
   const lang = saved?.language || getDefaultLanguage();
   setLanguage(lang);
   els.langSelect.value = lang;
 
   // Apply
   applyI18n();
+  updatePremiumUI();
   updateCurrencyUI();
   updateUI();
   bindInputEvents();

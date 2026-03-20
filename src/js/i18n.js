@@ -1,9 +1,11 @@
 import en from '../i18n/en.json';
 import ko from '../i18n/ko.json';
 import ja from '../i18n/ja.json';
+import zhCN from '../i18n/zh-CN.json';
+import zhTW from '../i18n/zh-TW.json';
 
-const translations = { en, ko, ja };
-const supportedLanguages = ['en', 'ko', 'ja'];
+const translations = { en, ko, ja, 'zh-CN': zhCN, 'zh-TW': zhTW };
+const supportedLanguages = ['en', 'ko', 'ja', 'zh-CN', 'zh-TW'];
 
 let currentLang = 'en';
 
@@ -11,6 +13,8 @@ export function getDefaultLanguage() {
   const lang = navigator.language;
   if (lang.startsWith('ko')) return 'ko';
   if (lang.startsWith('ja')) return 'ja';
+  if (lang === 'zh-TW' || lang === 'zh-Hant') return 'zh-TW';
+  if (lang.startsWith('zh')) return 'zh-CN';
   return 'en';
 }
 

@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "股票攤平計算器"
+  },
+  "extDescription": {
+    "message": "計算攤平後的新均價和報酬率變化"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "股票补仓计算器"
+  },
+  "extDescription": {
+    "message": "计算补仓后的新均价和收益率变化"
+  }
+}

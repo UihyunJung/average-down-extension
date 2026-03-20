@@ -519,12 +519,6 @@ body {
   background: rgba(59, 130, 246, 0.1);
 }
 
-.upgrade-link-sep {
-  color: var(--text-tertiary);
-  font-size: 11px;
-  line-height: 24px;
-}
-
 /* Input hint */
 .input-hint {
   display: none;
@@ -552,6 +546,9 @@ body {
 }
 
 .upgrade-link-sep {
+  color: var(--text-tertiary);
+  font-size: 11px;
+  line-height: 24px;
   margin: 0 4px;
   opacity: 0.5;
 }
