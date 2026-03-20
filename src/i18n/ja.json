@@ -42,5 +42,11 @@
   "networkError": "ネットワークエラー。再試行してください。",
   "checkoutError": "決済ページを開けません。再試行してください。",
   "verifyNotFound": "購入履歴がありません。先にお支払いを完了してください。",
-  "syncFailed": "同期失敗 — ネットワーク接続を確認してください"
+  "syncFailed": "同期失敗 — ネットワーク接続を確認してください",
+  "monthlyLabel": "月額",
+  "annualLabel": "年額",
+  "renews": "更新",
+  "expires": "終了",
+  "autoRenewNotice": "自動更新されます。キャンセルするにはPaddleからの領収メールをご確認ください。",
+  "canceledNotice": "キャンセル済み。{date}にプレミアムが終了します。"
 }

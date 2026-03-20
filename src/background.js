@@ -7,6 +7,9 @@ chrome.runtime.onInstalled.addListener(async () => {
     await chrome.storage.local.set({
       avgdown_install_id: crypto.randomUUID(),
       avgdown_premium: false,
+      avgdown_plan_type: null,
+      avgdown_expires_at: null,
+      avgdown_sub_status: null,
     });
   }
   chrome.alarms.create('check-premium', { periodInMinutes: 30 });
@@ -27,8 +30,9 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'check-status') {
     checkStatus().then(async () => {
-      const { avgdown_premium } = await chrome.storage.local.get('avgdown_premium');
-      sendResponse({ premium: avgdown_premium });
+      const { avgdown_premium, avgdown_plan_type, avgdown_expires_at, avgdown_sub_status } =
+        await chrome.storage.local.get(['avgdown_premium', 'avgdown_plan_type', 'avgdown_expires_at', 'avgdown_sub_status']);
+      sendResponse({ premium: avgdown_premium, planType: avgdown_plan_type, expiresAt: avgdown_expires_at, status: avgdown_sub_status });
     });
     return true; // 비동기 응답 허용
   }
@@ -41,8 +45,14 @@ async function checkStatus() {
     if (!avgdown_install_id) return;
     const res = await fetch(`${API_BASE}/api/status?id=${avgdown_install_id}`);
     if (!res.ok) throw new Error('API error');
-    const { premium } = await res.json();
-    await chrome.storage.local.set({ avgdown_premium: premium, avgdown_sync_failed: false });
+    const { premium, planType, expiresAt, status } = await res.json();
+    await chrome.storage.local.set({
+      avgdown_premium: premium,
+      avgdown_plan_type: planType,
+      avgdown_expires_at: expiresAt,
+      avgdown_sub_status: status,
+      avgdown_sync_failed: false,
+    });
   } catch {
     await chrome.storage.local.set({ avgdown_sync_failed: true });
   }

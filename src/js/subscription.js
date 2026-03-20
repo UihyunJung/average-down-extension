@@ -60,7 +60,12 @@ export async function restorePurchase(email) {
 export async function refreshStatus() {
   return new Promise((resolve) => {
     chrome.runtime.sendMessage({ type: 'check-status' }, (response) => {
-      resolve(response?.premium ?? false);
+      resolve({
+        premium: response?.premium ?? false,
+        planType: response?.planType ?? null,
+        expiresAt: response?.expiresAt ?? null,
+        status: response?.status ?? null,
+      });
     });
   });
 }

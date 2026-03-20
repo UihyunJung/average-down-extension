@@ -18,6 +18,9 @@ let currentPrice = '';
 let quantity = '';
 let additionalQuantity = 0;
 let isPremium = false;
+let planType = null;
+let expiresAt = null;
+let subStatus = null;
 
 // DOM refs
 let els = {};
@@ -61,6 +64,8 @@ function cacheElements() {
     btnRestoreConfirm: getEl('btn-restore-confirm'),
     btnRestoreCancel: getEl('btn-restore-cancel'),
     syncNotice: getEl('sync-notice'),
+    proPanel: getEl('pro-panel'),
+    proPanelText: getEl('pro-panel-text'),
   };
 }
 
@@ -115,18 +120,41 @@ function resetInputs() {
 function updatePremiumUI() {
   updateCurrencyDropdown();
   if (isPremium) {
-    els.statusBadge.textContent = '✓ ' + t('pro');
+    let label = t('pro');
+    if (planType === 'month') label = t('monthlyLabel');
+    else if (planType === 'year') label = t('annualLabel');
+
+    let badgeText = '✓ ' + label;
+    if (expiresAt) {
+      const d = new Date(expiresAt);
+      const dateStr = (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
+      const suffix = subStatus === 'canceled' ? t('expires') : t('renews');
+      badgeText += ' · ' + dateStr + ' ' + suffix;
+    }
+    els.statusBadge.textContent = badgeText;
     els.statusBadge.className = 'status-badge status-pro';
     els.upgradePanel.classList.remove('visible');
+
+    if (subStatus === 'canceled' && expiresAt) {
+      const d = new Date(expiresAt);
+      const dateStr = (d.getUTCMonth() + 1) + '/' + d.getUTCDate();
+      els.proPanelText.textContent = t('canceledNotice').replace('{date}', dateStr);
+    } else {
+      els.proPanelText.textContent = t('autoRenewNotice');
+    }
   } else {
     els.statusBadge.textContent = t('free');
     els.statusBadge.className = 'status-badge status-free';
+    els.proPanel.classList.remove('visible');
   }
 }
 
 function toggleUpgradePanel() {
-  if (isPremium) return;
-  els.upgradePanel.classList.toggle('visible');
+  if (isPremium) {
+    els.proPanel.classList.toggle('visible');
+  } else {
+    els.upgradePanel.classList.toggle('visible');
+  }
 }
 
 function showSyncNotice(failed) {
@@ -273,11 +301,14 @@ function bindInputEvents() {
     e.preventDefault();
     els.btnVerify.textContent = t('verifying');
     try {
-      const premium = await refreshStatus();
-      isPremium = premium;
+      const result = await refreshStatus();
+      isPremium = result.premium;
+      planType = result.planType;
+      expiresAt = result.expiresAt;
+      subStatus = result.status;
       updatePremiumUI();
       updateUI();
-      if (premium) {
+      if (result.premium) {
         els.upgradeMessage.textContent = t('restoreSuccess');
         els.upgradeMessage.className = 'restore-message success';
       } else {
@@ -345,6 +376,17 @@ function bindInputEvents() {
   chrome.storage.onChanged.addListener((changes) => {
     if (changes.avgdown_premium) {
       isPremium = changes.avgdown_premium.newValue === true;
+    }
+    if (changes.avgdown_plan_type) {
+      planType = changes.avgdown_plan_type.newValue || null;
+    }
+    if (changes.avgdown_expires_at) {
+      expiresAt = changes.avgdown_expires_at.newValue || null;
+    }
+    if (changes.avgdown_sub_status) {
+      subStatus = changes.avgdown_sub_status.newValue || null;
+    }
+    if (changes.avgdown_premium || changes.avgdown_plan_type || changes.avgdown_expires_at || changes.avgdown_sub_status) {
       updatePremiumUI();
       updateUI();
     }
@@ -422,6 +464,24 @@ async function init() {
 
   // Premium check from chrome.storage (cached by background)
   isPremium = await checkPremium();
+
+  // 저장된 구독 정보 읽기
+  const subInfo = await chrome.storage.local.get(['avgdown_plan_type', 'avgdown_expires_at', 'avgdown_sub_status']);
+  planType = subInfo.avgdown_plan_type || null;
+  expiresAt = subInfo.avgdown_expires_at || null;
+  subStatus = subInfo.avgdown_sub_status || null;
+
+  // 팝업 열 때마다 백그라운드에 즉시 상태 체크 요청 (결제 후 자동 반영)
+  refreshStatus().then((result) => {
+    if (result.premium !== isPremium || result.planType !== planType || result.expiresAt !== expiresAt || result.status !== subStatus) {
+      isPremium = result.premium;
+      planType = result.planType;
+      expiresAt = result.expiresAt;
+      subStatus = result.status;
+      updatePremiumUI();
+      updateUI();
+    }
+  }).catch(() => {});
 
   // Check sync status
   const { avgdown_sync_failed } = await chrome.storage.local.get('avgdown_sync_failed');

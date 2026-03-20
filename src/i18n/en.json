@@ -42,5 +42,11 @@
   "networkError": "Network error. Please try again.",
   "checkoutError": "Could not open checkout. Please try again.",
   "verifyNotFound": "No purchase found yet. Please complete payment first.",
-  "syncFailed": "Sync failed — check your network connection"
+  "syncFailed": "Sync failed — check your network connection",
+  "monthlyLabel": "Monthly",
+  "annualLabel": "Annual",
+  "renews": "renews",
+  "expires": "expires",
+  "autoRenewNotice": "Auto-renews. To cancel, check the receipt email from Paddle.",
+  "canceledNotice": "Canceled. Premium ends on {date}."
 }
