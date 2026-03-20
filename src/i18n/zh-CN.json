@@ -40,6 +40,7 @@
   "invalidEmail": "请输入有效的邮箱地址",
   "cooldownMessage": "请求过多，请稍后再试。",
   "networkError": "网络错误，请重试。",
+  "offlineError": "您似乎处于离线状态，请检查网络连接。",
   "checkoutError": "无法打开支付页面，请重试。",
   "verifyNotFound": "未找到购买记录，请先完成支付。",
   "syncFailed": "同步失败 — 请检查网络连接",

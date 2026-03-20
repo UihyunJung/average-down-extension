@@ -158,10 +158,16 @@ function toggleUpgradePanel() {
   }
 }
 
+function getErrorMessage() {
+  if (!navigator.onLine) return t('offlineError');
+  return t('networkError');
+}
+
 function showSyncNotice(failed) {
   if (failed) {
     els.syncNotice.textContent = t('syncFailed');
     els.syncNotice.classList.add('visible');
+    setTimeout(() => els.syncNotice.classList.remove('visible'), 5000);
   } else {
     els.syncNotice.classList.remove('visible');
   }
@@ -317,7 +323,7 @@ function bindInputEvents() {
         els.upgradeMessage.className = 'restore-message error';
       }
     } catch {
-      els.upgradeMessage.textContent = t('networkError');
+      els.upgradeMessage.textContent = getErrorMessage();
       els.upgradeMessage.className = 'restore-message error';
     }
     els.btnVerify.textContent = t('verifyPurchase');
@@ -337,7 +343,7 @@ function bindInputEvents() {
   // Restore confirm
   els.btnRestoreConfirm.addEventListener('click', async () => {
     const email = els.restoreEmail.value.trim();
-    if (!email || !email.includes('@') || !email.includes('.')) {
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       els.upgradeMessage.textContent = t('invalidEmail');
       els.upgradeMessage.className = 'restore-message error';
       return;
@@ -361,7 +367,7 @@ function bindInputEvents() {
         els.upgradeMessage.className = 'restore-message error';
       }
     } catch {
-      els.upgradeMessage.textContent = t('networkError');
+      els.upgradeMessage.textContent = getErrorMessage();
       els.upgradeMessage.className = 'restore-message error';
     }
     els.btnRestoreConfirm.disabled = false;

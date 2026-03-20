@@ -40,6 +40,7 @@
   "invalidEmail": "Please enter a valid email",
   "cooldownMessage": "Too many attempts. Please try again later.",
   "networkError": "Network error. Please try again.",
+  "offlineError": "You appear to be offline. Check your connection.",
   "checkoutError": "Could not open checkout. Please try again.",
   "verifyNotFound": "No purchase found yet. Please complete payment first.",
   "syncFailed": "Sync failed — check your network connection",

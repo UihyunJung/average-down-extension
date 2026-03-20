@@ -13,17 +13,17 @@ chrome.runtime.onInstalled.addListener(async () => {
     });
   }
   chrome.alarms.create('check-premium', { periodInMinutes: 30 });
-  await checkStatus();
+  await checkStatus(true);
 });
 
 // === onStartup: 브라우저 시작 시 즉시 체크 ===
 chrome.runtime.onStartup.addListener(async () => {
-  await checkStatus();
+  await checkStatus(true);
 });
 
 // === onAlarm: 30분 주기 체크 ===
 chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === 'check-premium') checkStatus();
+  if (alarm.name === 'check-premium') checkStatus(true);
 });
 
 // === 메시지 리스너: 팝업에서 즉시 상태 확인 요청 ===
@@ -38,8 +38,14 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   }
 });
 
-// === 상태 체크 함수 ===
-async function checkStatus() {
+// === 상태 체크 함수 (5분 캐시) ===
+let lastCheckTime = 0;
+const CHECK_CACHE_TTL = 5 * 60 * 1000;
+
+async function checkStatus(force = false) {
+  const now = Date.now();
+  if (!force && now - lastCheckTime < CHECK_CACHE_TTL) return;
+  lastCheckTime = now;
   try {
     const { avgdown_install_id } = await chrome.storage.local.get('avgdown_install_id');
     if (!avgdown_install_id) return;

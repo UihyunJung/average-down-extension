@@ -36,7 +36,8 @@ export function calculateSliderMax(avgPrice, currentPrice, quantity) {
     quantity * (currentPrice - avgPrice * (1 + targetRate)) / (targetRate * currentPrice)
   );
 
-  return Math.max(maxQty, 1);
+  if (!isFinite(maxQty) || isNaN(maxQty)) return Math.max(quantity, 100);
+  return Math.max(Math.min(maxQty, 1000000), 1);
 }
 
 export function sanitizeInput(value, currency) {
