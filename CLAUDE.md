@@ -18,7 +18,7 @@ npm run dev       # Vite 개발 서버 (확장 테스트에는 build 사용)
 - `src/background.js` → Service worker (30분 주기 상태 체크, chrome.alarms)
 - `src/js/subscription.js` → Paddle 백엔드 API 통신
 - `src/js/calculator.js` → 순수 계산 로직 (DOM 무관)
-- `src/js/i18n.js` → `data-i18n` 속성 기반 다국어 (fallback: en)
+- `src/js/i18n.js` → `data-i18n` 속성 기반 다국어 5개 언어 (en/ko/ja/zh-CN/zh-TW, fallback: en)
 - `src/js/storage.js` → chrome.storage.local 래퍼 (debounce + flush)
 
 ## Key Patterns
