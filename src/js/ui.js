@@ -9,8 +9,7 @@ import {
   formatRate,
 } from './calculator.js';
 import { loadState, debouncedSave, flushPendingSave, saveState } from './storage.js';
-// TODO: Re-enable when ExtensionPay Stripe Connect supports South Korea
-// import { checkPremium, openPaymentPage, onPaidStatusChange } from './subscription.js';
+import { checkPremium, openCheckout, restorePurchase, refreshStatus } from './subscription.js';
 
 // State
 let currency = 'USD';
@@ -51,6 +50,14 @@ function cacheElements() {
     currencySelect: getEl('currency-select'),
     upgradeBanner: getEl('upgrade-banner'),
     inputHint: getEl('input-hint'),
+    btnVerify: getEl('btn-verify'),
+    btnRestoreLink: getEl('btn-restore-link'),
+    restoreSection: getEl('restore-section'),
+    restoreEmail: getEl('restore-email'),
+    btnRestoreConfirm: getEl('btn-restore-confirm'),
+    btnRestoreCancel: getEl('btn-restore-cancel'),
+    restoreMessage: getEl('restore-message'),
+    syncNotice: getEl('sync-notice'),
   };
 }
 
@@ -110,28 +117,41 @@ function hideUpgradeBanner() {
   els.upgradeBanner.classList.remove('visible');
 }
 
+function updatePremiumUI() {
+  updateCurrencyDropdown();
+  if (isPremium) {
+    hideUpgradeBanner();
+    els.restoreSection.classList.remove('visible');
+  }
+}
+
+function showSyncNotice(failed) {
+  if (failed) {
+    els.syncNotice.textContent = t('syncFailed');
+    els.syncNotice.classList.add('visible');
+  } else {
+    els.syncNotice.classList.remove('visible');
+  }
+}
+
 function updateUI() {
   const valid = isValid();
   const sliderMax = getSliderMax();
 
-  // Toggle visibility
   els.sliderSection.classList.toggle('visible', valid);
   els.resultsSection.classList.toggle('visible', valid);
 
   if (!valid) return;
 
-  // Update slider max
   els.slider.max = sliderMax;
   els.sliderMax.textContent = formatNumber(sliderMax) + ' ' + t('shares');
 
-  // Clamp additional quantity
   if (additionalQuantity > sliderMax) {
     additionalQuantity = sliderMax;
     els.slider.value = additionalQuantity;
     els.sliderInput.value = additionalQuantity || '';
   }
 
-  // Calculate
   const result = calculateWater(
     parseNum(avgPrice),
     parseNum(currentPrice),
@@ -139,7 +159,6 @@ function updateUI() {
     additionalQuantity
   );
 
-  // Render return rates
   const beforePositive = result.beforeReturnRate >= 0;
   const afterPositive = result.afterReturnRate >= 0;
 
@@ -149,7 +168,6 @@ function updateUI() {
   els.rateAfter.textContent = (afterPositive ? '▲ ' : '▼ ') + formatRate(result.afterReturnRate);
   els.rateAfter.className = 'rate-value ' + (afterPositive ? 'positive' : 'negative');
 
-  // Render results
   const config = currencyConfig[currency] || currencyConfig.USD;
   els.newAvgValue.textContent = formatCurrency(result.newAveragePrice, currency);
   els.totalShares.textContent = formatNumber(result.totalQuantity, config.locale) + ' ' + t('shares');
@@ -182,7 +200,6 @@ function bindInputEvents() {
     scheduleSave();
   });
 
-  // Slider
   els.slider.addEventListener('input', (e) => {
     additionalQuantity = Number(e.target.value);
     els.sliderInput.value = additionalQuantity || '';
@@ -199,14 +216,12 @@ function bindInputEvents() {
     scheduleSave();
   });
 
-  // Reset
   els.btnReset.addEventListener('click', () => {
     resetInputs();
     updateUI();
     immediateSave();
   });
 
-  // Language
   els.langSelect.addEventListener('change', (e) => {
     setLanguage(e.target.value);
     applyI18n();
@@ -234,8 +249,87 @@ function bindInputEvents() {
     immediateSave();
   });
 
-  // TODO: Re-enable when ExtensionPay Stripe Connect supports South Korea
-  // els.upgradeBanner.addEventListener('click', () => { openPaymentPage(); });
+  // Upgrade banner click → open checkout
+  els.upgradeBanner.addEventListener('click', async (e) => {
+    if (e.target.closest('.upgrade-link')) return; // link clicks handled separately
+    try {
+      await openCheckout('monthly');
+    } catch {
+      els.restoreMessage.textContent = t('checkoutError');
+      els.restoreMessage.className = 'restore-message error';
+    }
+  });
+
+  // Verify purchase
+  els.btnVerify.addEventListener('click', async (e) => {
+    e.preventDefault();
+    els.btnVerify.textContent = t('verifying');
+    try {
+      const premium = await refreshStatus();
+      isPremium = premium;
+      updatePremiumUI();
+      updateUI();
+    } catch { /* ignore */ }
+    els.btnVerify.textContent = t('verifyPurchase');
+  });
+
+  // Restore purchase link
+  els.btnRestoreLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    els.restoreSection.classList.add('visible');
+    els.restoreEmail.focus();
+  });
+
+  // Restore confirm
+  els.btnRestoreConfirm.addEventListener('click', async () => {
+    const email = els.restoreEmail.value.trim();
+    if (!email || !email.includes('@') || !email.includes('.')) {
+      els.restoreMessage.textContent = t('invalidEmail');
+      els.restoreMessage.className = 'restore-message error';
+      return;
+    }
+
+    els.btnRestoreConfirm.disabled = true;
+    els.restoreMessage.textContent = t('verifying');
+    els.restoreMessage.className = 'restore-message';
+
+    try {
+      const result = await restorePurchase(email);
+      if (result.restored) {
+        isPremium = true;
+        updatePremiumUI();
+        updateUI();
+        els.restoreMessage.textContent = t('restoreSuccess');
+        els.restoreMessage.className = 'restore-message success';
+      } else {
+        const reason = result.reason === 'cooldown' ? t('cooldownMessage') : t('restoreFail');
+        els.restoreMessage.textContent = reason;
+        els.restoreMessage.className = 'restore-message error';
+      }
+    } catch {
+      els.restoreMessage.textContent = t('networkError');
+      els.restoreMessage.className = 'restore-message error';
+    }
+    els.btnRestoreConfirm.disabled = false;
+  });
+
+  // Restore cancel
+  els.btnRestoreCancel.addEventListener('click', () => {
+    els.restoreSection.classList.remove('visible');
+    els.restoreMessage.textContent = '';
+  });
+
+  // Storage change listener — background updates premium
+  chrome.storage.onChanged.addListener((changes) => {
+    if (changes.avgdown_premium) {
+      isPremium = changes.avgdown_premium.newValue === true;
+      updatePremiumUI();
+      updateUI();
+    }
+    if (changes.avgdown_sync_failed) {
+      showSyncNotice(changes.avgdown_sync_failed.newValue === true);
+    }
+  });
 
   // Flush on popup close
   document.addEventListener('visibilitychange', () => {
@@ -269,7 +363,6 @@ function updateCurrencyDropdown() {
       opt.textContent = `${opt.value} (${config.symbol})`;
     }
   }
-  hideUpgradeBanner();
 }
 
 function updateCurrencyUI() {
@@ -279,12 +372,10 @@ function updateCurrencyUI() {
   els.inputAvgPrice.placeholder = config.placeholder;
   els.inputCurrentPrice.placeholder = currency === 'KRW' ? '40000' : currency === 'JPY' ? '12000' : config.placeholder;
 
-  // Sync inputMode with currency decimals
   const mode = config.decimals === 0 ? 'numeric' : 'decimal';
   els.inputAvgPrice.inputMode = mode;
   els.inputCurrentPrice.inputMode = mode;
 
-  // Show inputHint only for decimal currencies
   els.inputHint.classList.toggle('visible', config.decimals > 0);
 }
 
@@ -307,18 +398,21 @@ async function init() {
     els.sliderInput.value = additionalQuantity || '';
   }
 
-  // TODO: Re-enable when ExtensionPay Stripe Connect supports South Korea
-  // isPremium = await checkPremium();
-  // onPaidStatusChange(() => { isPremium = true; updateCurrencyDropdown(); hideUpgradeBanner(); });
+  // Premium check from chrome.storage (cached by background)
+  isPremium = await checkPremium();
 
-  // Verify saved currency is accessible (free version: USD only)
+  // Check sync status
+  const { avgdown_sync_failed } = await chrome.storage.local.get('avgdown_sync_failed');
+  showSyncNotice(avgdown_sync_failed === true);
+
+  // Verify saved currency is accessible
   if (currencyConfig[currency]?.premium && !isPremium) {
     currency = 'USD';
   }
   els.currencySelect.value = currency;
-  updateCurrencyDropdown();
+  updatePremiumUI();
 
-  // Language (from saved state or browser default)
+  // Language
   const lang = saved?.language || getDefaultLanguage();
   setLanguage(lang);
   els.langSelect.value = lang;

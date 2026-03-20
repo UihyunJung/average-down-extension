@@ -23,5 +23,18 @@
   "howToStep1": "Enter average price, current price, and shares owned.",
   "howToStep2": "Adjust additional shares with the slider.",
   "howToStep3": "Check the new average price and return rate change.",
-  "inputHint": "Use period (.) as decimal separator"
+  "inputHint": "Use period (.) as decimal separator",
+  "verifyPurchase": "Already paid? Verify",
+  "restorePurchase": "Restore Purchase",
+  "verifying": "Verifying...",
+  "restoreSuccess": "Purchase restored!",
+  "restoreFail": "No purchase found for this email",
+  "enterEmail": "Enter your email",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "invalidEmail": "Please enter a valid email",
+  "cooldownMessage": "Too many attempts. Please try again later.",
+  "networkError": "Network error. Please try again.",
+  "checkoutError": "Could not open checkout. Please try again.",
+  "syncFailed": "Sync failed — check your network connection"
 }

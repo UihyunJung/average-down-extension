@@ -423,3 +423,87 @@ body {
 .input-hint.visible {
   display: block;
 }
+
+/* Upgrade links */
+.upgrade-links {
+  margin-top: 6px;
+  font-size: 11px;
+}
+
+.upgrade-link {
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.upgrade-link-sep {
+  margin: 0 4px;
+  opacity: 0.5;
+}
+
+/* Restore section */
+.restore-section {
+  display: none;
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--bg-card);
+  gap: 8px;
+}
+
+.restore-section.visible {
+  display: flex;
+  flex-direction: column;
+}
+
+.restore-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-plan {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-plan-primary {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.btn-plan:hover {
+  opacity: 0.9;
+}
+
+.restore-message {
+  font-size: 12px;
+  margin: 0;
+  min-height: 16px;
+}
+
+.restore-message.success {
+  color: #16a34a;
+}
+
+.restore-message.error {
+  color: var(--rate-positive);
+}
+
+/* Sync notice */
+.sync-notice {
+  display: none;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  text-align: center;
+  font-style: italic;
+}
+
+.sync-notice.visible {
+  display: block;
+}

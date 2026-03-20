@@ -23,5 +23,18 @@
   "howToStep1": "평균 매입단가, 현재가, 보유 수량을 입력합니다.",
   "howToStep2": "슬라이더로 추가 매수 수량을 조절합니다.",
   "howToStep3": "새로운 평균단가와 수익률 변화를 확인하세요.",
-  "inputHint": "소수점은 마침표(.)를 사용하세요"
+  "inputHint": "소수점은 마침표(.)를 사용하세요",
+  "verifyPurchase": "결제 완료? 확인하기",
+  "restorePurchase": "구매 복원",
+  "verifying": "확인 중...",
+  "restoreSuccess": "구매가 복원되었습니다!",
+  "restoreFail": "해당 이메일의 구매 내역을 찾을 수 없습니다",
+  "enterEmail": "이메일을 입력하세요",
+  "confirm": "확인",
+  "cancel": "취소",
+  "invalidEmail": "올바른 이메일을 입력하세요",
+  "cooldownMessage": "요청이 너무 많습니다. 잠시 후 다시 시도하세요.",
+  "networkError": "네트워크 오류. 다시 시도해주세요.",
+  "checkoutError": "결제 페이지를 열 수 없습니다. 다시 시도해주세요.",
+  "syncFailed": "동기화 실패 — 네트워크 연결을 확인하세요"
 }

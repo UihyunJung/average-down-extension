@@ -23,5 +23,18 @@
   "howToStep1": "平均取得単価、現在価格、保有数量を入力します。",
   "howToStep2": "スライダーで追加購入数量を調整します。",
   "howToStep3": "新しい平均単価と収益率の変化を確認してください。",
-  "inputHint": "小数点にはピリオド(.)を使用してください"
+  "inputHint": "小数点にはピリオド(.)を使用してください",
+  "verifyPurchase": "支払い済み？確認する",
+  "restorePurchase": "購入を復元",
+  "verifying": "確認中...",
+  "restoreSuccess": "購入が復元されました！",
+  "restoreFail": "このメールアドレスの購入履歴が見つかりません",
+  "enterEmail": "メールアドレスを入力",
+  "confirm": "確認",
+  "cancel": "キャンセル",
+  "invalidEmail": "有効なメールアドレスを入力してください",
+  "cooldownMessage": "リクエストが多すぎます。しばらくしてから再試行してください。",
+  "networkError": "ネットワークエラー。再試行してください。",
+  "checkoutError": "決済ページを開けません。再試行してください。",
+  "syncFailed": "同期失敗 — ネットワーク接続を確認してください"
 }
