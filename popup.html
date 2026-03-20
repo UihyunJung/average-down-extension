@@ -7,44 +7,53 @@
 </head>
 <body>
   <div class="container">
-    <!-- Header -->
-    <div class="header">
+    <!-- Header Row 1: Title -->
+    <div class="header-title">
       <h1 data-i18n="title">Average Down Calculator</h1>
-      <div class="header-controls">
-        <select id="lang-select" class="lang-select" data-i18n-aria="language">
-          <option value="en">EN</option>
-          <option value="ko">한국어</option>
-          <option value="ja">日本語</option>
-        </select>
-        <select id="currency-select" class="lang-select" data-i18n-aria="currency">
-          <option value="USD">USD ($)</option>
-          <option value="KRW">KRW (₩) 🔒</option>
-          <option value="JPY">JPY (¥) 🔒</option>
-          <option value="EUR">EUR (€) 🔒</option>
-          <option value="GBP">GBP (£) 🔒</option>
-        </select>
-        <button id="btn-reset" class="btn-reset" data-i18n="reset">Reset</button>
-      </div>
     </div>
 
-    <!-- Upgrade Banner -->
-    <div id="upgrade-banner" class="upgrade-banner">
-      <span data-i18n="upgradeDesc">Unlock additional currencies for $1/month</span>
-      <div class="upgrade-links">
-        <a id="btn-verify" href="#" class="upgrade-link" data-i18n="verifyPurchase">Already paid? Verify</a>
-        <span class="upgrade-link-sep">·</span>
-        <a id="btn-restore-link" href="#" class="upgrade-link" data-i18n="restorePurchase">Restore Purchase</a>
-      </div>
+    <!-- Header Row 2: Controls -->
+    <div class="header-controls">
+      <select id="lang-select" class="lang-select" data-i18n-aria="language">
+        <option value="en">EN</option>
+        <option value="ko">한국어</option>
+        <option value="ja">日本語</option>
+      </select>
+      <select id="currency-select" class="lang-select" data-i18n-aria="currency">
+        <option value="USD">USD ($)</option>
+        <option value="KRW">KRW (₩) 🔒</option>
+        <option value="JPY">JPY (¥) 🔒</option>
+        <option value="EUR">EUR (€) 🔒</option>
+        <option value="GBP">GBP (£) 🔒</option>
+      </select>
+      <button id="btn-status-badge" class="status-badge status-free" data-i18n="free">Free</button>
+      <button id="btn-reset" class="btn-reset"><span class="reset-icon">↻</span> <span data-i18n="reset">Reset</span></button>
     </div>
 
-    <!-- Restore UI (hidden by default) -->
-    <div id="restore-section" class="restore-section">
-      <input id="restore-email" class="input-field" type="email" data-i18n-placeholder="enterEmail" placeholder="Email">
-      <div class="restore-buttons">
-        <button id="btn-restore-confirm" class="btn-plan btn-plan-primary" data-i18n="confirm">Confirm</button>
-        <button id="btn-restore-cancel" class="btn-plan" data-i18n="cancel">Cancel</button>
+    <!-- Upgrade Panel (toggle by badge click) -->
+    <div id="upgrade-panel" class="upgrade-panel">
+      <p class="upgrade-title" data-i18n="upgradeDesc">Unlock additional currencies</p>
+      <div class="upgrade-buttons">
+        <button id="btn-monthly" class="btn-plan" data-i18n="planMonthly">$1.49/mo</button>
+        <button id="btn-annual" class="btn-plan btn-plan-primary" data-i18n="planAnnual">$12/yr — Save 33%</button>
       </div>
-      <p id="restore-message" class="restore-message"></p>
+      <details class="already-paid">
+        <summary data-i18n="alreadyPaid">Already paid?</summary>
+        <div class="already-paid-actions">
+          <button id="btn-verify" class="btn-text" data-i18n="verifyPurchase">Verify</button>
+          <span class="upgrade-link-sep">·</span>
+          <button id="btn-restore-link" class="btn-text" data-i18n="restorePurchase">Restore</button>
+        </div>
+        <!-- Restore email input (shown when Restore clicked) -->
+        <div id="restore-section" class="restore-section">
+          <input id="restore-email" class="input-field" type="email" data-i18n-placeholder="enterEmail" placeholder="Email">
+          <div class="restore-buttons">
+            <button id="btn-restore-confirm" class="btn-plan btn-plan-primary" data-i18n="confirm">Confirm</button>
+            <button id="btn-restore-cancel" class="btn-plan" data-i18n="cancel">Cancel</button>
+          </div>
+        </div>
+      </details>
+      <p id="upgrade-message" class="restore-message"></p>
     </div>
 
     <!-- Sync failed notice -->

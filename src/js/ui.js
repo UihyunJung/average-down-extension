@@ -48,15 +48,18 @@ function cacheElements() {
     totalInvestment: getEl('total-investment'),
     additionalInvestment: getEl('additional-investment'),
     currencySelect: getEl('currency-select'),
-    upgradeBanner: getEl('upgrade-banner'),
+    statusBadge: getEl('btn-status-badge'),
+    upgradePanel: getEl('upgrade-panel'),
+    btnMonthly: getEl('btn-monthly'),
+    btnAnnual: getEl('btn-annual'),
     inputHint: getEl('input-hint'),
+    upgradeMessage: getEl('upgrade-message'),
     btnVerify: getEl('btn-verify'),
     btnRestoreLink: getEl('btn-restore-link'),
     restoreSection: getEl('restore-section'),
     restoreEmail: getEl('restore-email'),
     btnRestoreConfirm: getEl('btn-restore-confirm'),
     btnRestoreCancel: getEl('btn-restore-cancel'),
-    restoreMessage: getEl('restore-message'),
     syncNotice: getEl('sync-notice'),
   };
 }
@@ -109,20 +112,21 @@ function resetInputs() {
   els.inputQuantity.value = '';
 }
 
-function showUpgradeBanner() {
-  els.upgradeBanner.classList.add('visible');
-}
-
-function hideUpgradeBanner() {
-  els.upgradeBanner.classList.remove('visible');
-}
-
 function updatePremiumUI() {
   updateCurrencyDropdown();
   if (isPremium) {
-    hideUpgradeBanner();
-    els.restoreSection.classList.remove('visible');
+    els.statusBadge.textContent = '✓ ' + t('pro');
+    els.statusBadge.className = 'status-badge status-pro';
+    els.upgradePanel.classList.remove('visible');
+  } else {
+    els.statusBadge.textContent = t('free');
+    els.statusBadge.className = 'status-badge status-free';
   }
+}
+
+function toggleUpgradePanel() {
+  if (isPremium) return;
+  els.upgradePanel.classList.toggle('visible');
 }
 
 function showSyncNotice(failed) {
@@ -225,8 +229,11 @@ function bindInputEvents() {
   els.langSelect.addEventListener('change', (e) => {
     setLanguage(e.target.value);
     applyI18n();
+    updatePremiumUI();
     updateCurrencyUI();
     updateUI();
+    // 동적 메시지 초기화 (언어 변경 시 구 언어 텍스트 잔류 방지)
+    els.upgradeMessage.textContent = '';
     immediateSave();
   });
 
@@ -237,11 +244,11 @@ function bindInputEvents() {
 
     if (config.premium && !isPremium) {
       els.currencySelect.value = currency;
-      showUpgradeBanner();
+      els.upgradePanel.classList.add('visible');
       return;
     }
 
-    hideUpgradeBanner();
+    els.upgradePanel.classList.remove('visible');
     currency = newCurrency;
     resetInputs();
     updateCurrencyUI();
@@ -249,16 +256,17 @@ function bindInputEvents() {
     immediateSave();
   });
 
-  // Upgrade banner click → open checkout
-  els.upgradeBanner.addEventListener('click', async (e) => {
-    if (e.target.closest('.upgrade-link')) return; // link clicks handled separately
+  // Plan buttons → open checkout
+  async function handleCheckout(plan) {
     try {
-      await openCheckout('monthly');
+      await openCheckout(plan);
     } catch {
-      els.restoreMessage.textContent = t('checkoutError');
-      els.restoreMessage.className = 'restore-message error';
+      els.upgradeMessage.textContent = t('checkoutError');
+      els.upgradeMessage.className = 'restore-message error';
     }
-  });
+  }
+  els.btnMonthly.addEventListener('click', () => handleCheckout('monthly'));
+  els.btnAnnual.addEventListener('click', () => handleCheckout('annual'));
 
   // Verify purchase
   els.btnVerify.addEventListener('click', async (e) => {
@@ -269,13 +277,27 @@ function bindInputEvents() {
       isPremium = premium;
       updatePremiumUI();
       updateUI();
-    } catch { /* ignore */ }
+      if (premium) {
+        els.upgradeMessage.textContent = t('restoreSuccess');
+        els.upgradeMessage.className = 'restore-message success';
+      } else {
+        els.upgradeMessage.textContent = t('verifyNotFound');
+        els.upgradeMessage.className = 'restore-message error';
+      }
+    } catch {
+      els.upgradeMessage.textContent = t('networkError');
+      els.upgradeMessage.className = 'restore-message error';
+    }
     els.btnVerify.textContent = t('verifyPurchase');
   });
 
+  // Badge click → toggle upgrade panel
+  els.statusBadge.addEventListener('click', () => {
+    toggleUpgradePanel();
+  });
+
   // Restore purchase link
-  els.btnRestoreLink.addEventListener('click', (e) => {
-    e.preventDefault();
+  els.btnRestoreLink.addEventListener('click', () => {
     els.restoreSection.classList.add('visible');
     els.restoreEmail.focus();
   });
@@ -284,14 +306,14 @@ function bindInputEvents() {
   els.btnRestoreConfirm.addEventListener('click', async () => {
     const email = els.restoreEmail.value.trim();
     if (!email || !email.includes('@') || !email.includes('.')) {
-      els.restoreMessage.textContent = t('invalidEmail');
-      els.restoreMessage.className = 'restore-message error';
+      els.upgradeMessage.textContent = t('invalidEmail');
+      els.upgradeMessage.className = 'restore-message error';
       return;
     }
 
     els.btnRestoreConfirm.disabled = true;
-    els.restoreMessage.textContent = t('verifying');
-    els.restoreMessage.className = 'restore-message';
+    els.upgradeMessage.textContent = t('verifying');
+    els.upgradeMessage.className = 'restore-message';
 
     try {
       const result = await restorePurchase(email);
@@ -299,16 +321,16 @@ function bindInputEvents() {
         isPremium = true;
         updatePremiumUI();
         updateUI();
-        els.restoreMessage.textContent = t('restoreSuccess');
-        els.restoreMessage.className = 'restore-message success';
+        els.upgradeMessage.textContent = t('restoreSuccess');
+        els.upgradeMessage.className = 'restore-message success';
       } else {
         const reason = result.reason === 'cooldown' ? t('cooldownMessage') : t('restoreFail');
-        els.restoreMessage.textContent = reason;
-        els.restoreMessage.className = 'restore-message error';
+        els.upgradeMessage.textContent = reason;
+        els.upgradeMessage.className = 'restore-message error';
       }
     } catch {
-      els.restoreMessage.textContent = t('networkError');
-      els.restoreMessage.className = 'restore-message error';
+      els.upgradeMessage.textContent = t('networkError');
+      els.upgradeMessage.className = 'restore-message error';
     }
     els.btnRestoreConfirm.disabled = false;
   });
@@ -316,7 +338,7 @@ function bindInputEvents() {
   // Restore cancel
   els.btnRestoreCancel.addEventListener('click', () => {
     els.restoreSection.classList.remove('visible');
-    els.restoreMessage.textContent = '';
+    els.upgradeMessage.textContent = '';
   });
 
   // Storage change listener — background updates premium
