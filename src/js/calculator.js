@@ -5,6 +5,7 @@ export const currencyConfig = {
   EUR: { symbol: '€', placeholder: '140.00', decimals: 2, locale: 'de-DE', premium: true },
   GBP: { symbol: '£', placeholder: '120.00', decimals: 2, locale: 'en-GB', premium: true },
   CNY: { symbol: '¥', placeholder: '1000.00', decimals: 2, locale: 'zh-CN', premium: true },
+  INR: { symbol: '₹', placeholder: '5000.00', decimals: 2, locale: 'en-IN', premium: true },
 };
 
 export function calculateWater(avgPrice, currentPrice, quantity, additionalQty) {

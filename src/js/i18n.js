@@ -3,9 +3,11 @@ import ko from '../i18n/ko.json';
 import ja from '../i18n/ja.json';
 import zhCN from '../i18n/zh-CN.json';
 import zhTW from '../i18n/zh-TW.json';
+import de from '../i18n/de.json';
+import es from '../i18n/es.json';
 
-const translations = { en, ko, ja, 'zh-CN': zhCN, 'zh-TW': zhTW };
-const supportedLanguages = ['en', 'ko', 'ja', 'zh-CN', 'zh-TW'];
+const translations = { en, ko, ja, 'zh-CN': zhCN, 'zh-TW': zhTW, de, es };
+const supportedLanguages = ['en', 'ko', 'ja', 'zh-CN', 'zh-TW', 'de', 'es'];
 
 let currentLang = 'en';
 
@@ -15,6 +17,8 @@ export function getDefaultLanguage() {
   if (lang.startsWith('ja')) return 'ja';
   if (lang === 'zh-TW' || lang === 'zh-Hant') return 'zh-TW';
   if (lang.startsWith('zh')) return 'zh-CN';
+  if (lang.startsWith('de')) return 'de';
+  if (lang.startsWith('es')) return 'es';
   return 'en';
 }
 

@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Calculadora de Promedio a la Baja"
+  },
+  "extDescription": {
+    "message": "Calculadora de promedio a la baja para acciones. Calcula al instante el nuevo precio promedio, cambio de rentabilidad e inversión total."
+  }
+}
