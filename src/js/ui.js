@@ -306,6 +306,8 @@ function bindInputEvents() {
   // Verify purchase
   els.btnVerify.addEventListener('click', async (e) => {
     e.preventDefault();
+    els.upgradeMessage.textContent = '';
+    els.restoreSection.classList.remove('visible');
     els.btnVerify.textContent = t('verifying');
     try {
       const result = await refreshStatus();
@@ -336,6 +338,7 @@ function bindInputEvents() {
 
   // Restore purchase link
   els.btnRestoreLink.addEventListener('click', () => {
+    els.upgradeMessage.textContent = '';
     els.restoreSection.classList.add('visible');
     els.restoreEmail.focus();
   });
