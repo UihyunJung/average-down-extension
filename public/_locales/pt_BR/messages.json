@@ -1,0 +1,8 @@
+{
+  "extName": {
+    "message": "Calculadora de Preço Médio"
+  },
+  "extDescription": {
+    "message": "Calculadora de preço médio para ações. Calcule instantaneamente o novo preço médio, variação de rentabilidade e investimento total."
+  }
+}

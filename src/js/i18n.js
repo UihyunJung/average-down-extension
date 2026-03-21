@@ -5,9 +5,10 @@ import zhCN from '../i18n/zh-CN.json';
 import zhTW from '../i18n/zh-TW.json';
 import de from '../i18n/de.json';
 import es from '../i18n/es.json';
+import pt from '../i18n/pt.json';
 
-const translations = { en, ko, ja, 'zh-CN': zhCN, 'zh-TW': zhTW, de, es };
-const supportedLanguages = ['en', 'ko', 'ja', 'zh-CN', 'zh-TW', 'de', 'es'];
+const translations = { en, ko, ja, 'zh-CN': zhCN, 'zh-TW': zhTW, de, es, pt };
+const supportedLanguages = ['en', 'ko', 'ja', 'zh-CN', 'zh-TW', 'de', 'es', 'pt'];
 
 let currentLang = 'en';
 
@@ -19,6 +20,7 @@ export function getDefaultLanguage() {
   if (lang.startsWith('zh')) return 'zh-CN';
   if (lang.startsWith('de')) return 'de';
   if (lang.startsWith('es')) return 'es';
+  if (lang.startsWith('pt')) return 'pt';
   return 'en';
 }
 
