@@ -46,8 +46,8 @@
   "syncFailed": "Synchronisierung fehlgeschlagen — Netzwerkverbindung prüfen",
   "monthlyLabel": "Monatlich",
   "annualLabel": "Jährlich",
-  "renews": "Verlängerung",
-  "expires": "läuft ab",
+  "renews": "Verl.",
+  "expires": "endet",
   "autoRenewNotice": "Verlängert sich automatisch. Zum Kündigen prüfen Sie die Bestätigungs-E-Mail von Paddle.",
   "canceledNotice": "Gekündigt. Premium endet am {date}."
 }

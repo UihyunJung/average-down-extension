@@ -390,6 +390,10 @@ body {
 /* Status badge (height/font inherited from unified controls) */
 .status-badge {
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
 .status-free {
