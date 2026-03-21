@@ -6,9 +6,9 @@ Chrome 확장 프로그램 — 주식 물타기(평균단가 낮추기) 계산�
 
 - 평균 매입단가, 현재가, 보유수량 입력 → 추가 매수 시 새 평균단가/수익률 계산
 - 슬라이더로 추가 매수 수량 조절
-- 다국어 지원 (English, 한국어, 日本語)
+- 다국어 지원 (EN, KO, JA, ZH-CN, ZH-TW, DE, ES, PT)
 - 다크모드 자동 지원
-- Pro 구독: 추가 통화 (KRW, JPY, EUR, GBP) 잠금 해제
+- Pro 구독: 추가 통화 (KRW, JPY, EUR, GBP, CNY, INR, BRL) 잠금 해제
 
 ## Tech Stack
 
