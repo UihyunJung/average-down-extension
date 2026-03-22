@@ -8,8 +8,9 @@ Chrome 확장 프로그램: 주식 물타기 계산기. MV3 + Vanilla JS + Vite 
 ## Commands
 
 ```bash
-npm run build     # Vite 프로덕션 빌드 → dist/
-npm run dev       # Vite 개발 서버 (확장 테스트에는 build 사용)
+npm run build       # 프로덕션 빌드 → dist/ (production 백엔드)
+npm run build:dev   # 개발 빌드 → dist/ (sandbox 백엔드)
+npm run dev         # Vite 개발 서버 (확장 테스트에는 build 사용)
 ```
 
 ## Architecture
@@ -35,7 +36,8 @@ npm run dev       # Vite 개발 서버 (확장 테스트에는 build 사용)
 별도 저장소: `/Users/jung-euihyun/projects/paddle-extensions-backend`
 - API: `/api/status`, `/api/create-checkout`, `/api/restore`, `/api/webhook`
 - 범용 백엔드 — 여러 확장에서 공유. 확장별 로직 넣지 말 것
-- Base URL: `src/js/config.js`의 `API_BASE`
+- Base URL: `src/js/config.js`의 `API_BASE` (`VITE_API_BASE` 환경변수로 오버라이드 가능)
+- 환경 분리: `.env.dev` (sandbox 백엔드) / 기본값 (production 백엔드)
 
 ## Conventions
 

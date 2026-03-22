@@ -20,7 +20,8 @@ Chrome 확장 프로그램 — 주식 물타기(평균단가 낮추기) 계산�
 
 ```bash
 npm install
-npm run build     # dist/ 에 빌드 출력
+npm run build       # 프로덕션 빌드 → dist/
+npm run build:dev   # 개발 빌드 (sandbox 백엔드) → dist/
 ```
 
 ### 로컬 테스트
