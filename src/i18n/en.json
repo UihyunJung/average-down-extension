@@ -49,5 +49,19 @@
   "renews": "renews",
   "expires": "expires",
   "autoRenewNotice": "Auto-renews. To cancel, check the receipt email from Paddle.",
-  "canceledNotice": "Canceled. Premium ends on {date}."
+  "canceledNotice": "Canceled. Premium ends on {date}.",
+  "reverseTitle": "Target Avg Calculator",
+  "targetAvg": "Target Average Price",
+  "requiredShares": "Shares Needed",
+  "requiredInvestment": "Investment Needed",
+  "reverseAlready": "Target is already at or below your current average.",
+  "reverseImpossible": "Must be above current price.",
+  "reverseInvalid": "Enter a valid target price",
+  "simulatorTitle": "Scenario Simulator",
+  "scenarioBear": "Bear -20%",
+  "scenarioModerate": "Moderate -10%",
+  "scenarioBull": "Bull +10%",
+  "scenarioHeaderLabel": "Scenario",
+  "scenarioDesc": "If the price changes, what happens when you buy the same additional shares?",
+  "scenarioLocked": "Unlock with Pro to compare scenarios"
 }

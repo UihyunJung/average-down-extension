@@ -259,6 +259,10 @@ body {
   display: block;
 }
 
+.results-section > .card-title {
+  margin-bottom: 12px;
+}
+
 .rate-comparison {
   display: flex;
   align-items: center;
@@ -652,4 +656,108 @@ body {
 
 .sync-notice.visible {
   display: block;
+}
+
+/* Reverse calculator */
+.reverse-section {
+  display: none;
+}
+.reverse-section.visible {
+  display: block;
+}
+.reverse-result {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--bg-result);
+  border: 1px solid var(--border-result);
+}
+.reverse-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reverse-hint {
+  font-size: 11px;
+  color: var(--rate-positive);
+  margin-top: 6px;
+  font-style: italic;
+  min-height: 16px;
+}
+
+/* Scenario Simulator */
+.simulator-section {
+  display: none;
+}
+.simulator-section.visible {
+  display: block;
+}
+.premium-lock {
+  display: none;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  background: rgba(59, 130, 246, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.premium-lock.visible {
+  display: inline;
+}
+.scenario-desc {
+  display: none;
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.scenario-desc.visible {
+  display: block;
+}
+.scenario-table {
+  display: none;
+  font-size: 12px;
+}
+.scenario-table.visible {
+  display: block;
+}
+.scenario-header, .scenario-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 0.8fr;
+  gap: 4px;
+  padding: 6px 0;
+  align-items: center;
+}
+.scenario-header {
+  color: var(--text-tertiary);
+  font-size: 11px;
+  border-bottom: 1px solid var(--border-color);
+}
+.scenario-row {
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.scenario-row:last-child {
+  border-bottom: none;
+}
+.scenario-rate.positive { color: var(--rate-positive); }
+.scenario-rate.negative { color: var(--rate-negative); }
+.scenario-locked-msg {
+  display: none;
+  font-size: 12px;
+  color: var(--text-tertiary);
+  text-align: center;
+  padding: 12px 0;
+}
+.scenario-locked-msg.visible {
+  display: block;
+}
+
+@media (prefers-color-scheme: dark) {
+  .scenario-row {
+    border-bottom-color: rgba(255,255,255,0.05);
+  }
+  .premium-lock {
+    background: rgba(59, 130, 246, 0.2);
+  }
 }

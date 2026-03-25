@@ -8,7 +8,7 @@
     "default_popup": "popup.html"
   },
   "permissions": ["storage", "alarms"],
-  "host_permissions": ["https://paddle-extensions-backend.vercel.app/*"],
+  "host_permissions": ["https://*.vercel.app/*"],
   "background": {
     "service_worker": "background.js",
     "type": "module"

@@ -104,3 +104,22 @@ export function formatNumber(value, locale = 'en-US') {
 export function formatRate(value) {
   return value >= 0 ? `+${value.toFixed(2)}%` : `${value.toFixed(2)}%`;
 }
+
+export function calculateReverse(avgPrice, currentPrice, quantity, targetAvg) {
+  if (targetAvg <= currentPrice || targetAvg >= avgPrice) return null;
+  if (currentPrice <= 0 || quantity <= 0) return null;
+
+  const requiredShares = (quantity * (avgPrice - targetAvg)) / (targetAvg - currentPrice);
+  if (!isFinite(requiredShares) || requiredShares < 0) return null;
+
+  return {
+    requiredShares: Math.ceil(requiredShares),
+    additionalInvestment: Math.ceil(requiredShares) * currentPrice,
+  };
+}
+
+export const scenarioPresets = [
+  { key: 'bear', change: -0.20 },
+  { key: 'moderate', change: -0.10 },
+  { key: 'bull', change: +0.10 },
+];

@@ -49,5 +49,19 @@
   "renews": "Verl.",
   "expires": "endet",
   "autoRenewNotice": "Verlängert sich automatisch. Zum Kündigen prüfen Sie die Bestätigungs-E-Mail von Paddle.",
-  "canceledNotice": "Gekündigt. Premium endet am {date}."
+  "canceledNotice": "Gekündigt. Premium endet am {date}.",
+  "reverseTitle": "Ziel-Durchschnittspreis berechnen",
+  "targetAvg": "Ziel-Durchschnittspreis",
+  "requiredShares": "Benötigte Aktien",
+  "requiredInvestment": "Benötigte Investition",
+  "reverseAlready": "Der Zielpreis liegt bereits auf oder unter Ihrem Durchschnitt.",
+  "reverseImpossible": "Muss über dem aktuellen Kurs liegen.",
+  "reverseInvalid": "Gültigen Zielpreis eingeben",
+  "simulatorTitle": "Szenario-Simulator",
+  "scenarioBear": "Bärisch -20%",
+  "scenarioModerate": "Neutral -10%",
+  "scenarioBull": "Bullisch +10%",
+  "scenarioHeaderLabel": "Szenario",
+  "scenarioDesc": "Wenn sich der Kurs ändert, was passiert beim Kauf der gleichen Anzahl?",
+  "scenarioLocked": "Pro freischalten für Szenariovergleich"
 }

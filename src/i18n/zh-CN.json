@@ -49,5 +49,19 @@
   "renews": "续费",
   "expires": "到期",
   "autoRenewNotice": "自动续费。如需取消，请查看Paddle发送的收据邮件。",
-  "canceledNotice": "已取消。Pro版将于{date}到期。"
+  "canceledNotice": "已取消。Pro版将于{date}到期。",
+  "reverseTitle": "目标均价反算",
+  "targetAvg": "目标均价",
+  "requiredShares": "需要买入数量",
+  "requiredInvestment": "需要投资金额",
+  "reverseAlready": "输入的价格已等于或低于当前均价。",
+  "reverseImpossible": "必须高于当前价格。",
+  "reverseInvalid": "请输入有效的目标价格",
+  "simulatorTitle": "情景模拟器",
+  "scenarioBear": "看跌 -20%",
+  "scenarioModerate": "中性 -10%",
+  "scenarioBull": "看涨 +10%",
+  "scenarioHeaderLabel": "情景",
+  "scenarioDesc": "如果价格变动，以相同数量追加买入会怎样？",
+  "scenarioLocked": "升级Pro解锁情景对比"
 }

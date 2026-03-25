@@ -156,6 +156,62 @@
       </div>
     </div>
 
+    <!-- Target Average Reverse Calculator -->
+    <div id="reverse-section" class="card reverse-section">
+      <h2 class="card-title" data-i18n="reverseTitle">Target Avg Calculator</h2>
+      <div class="input-group">
+        <label class="input-label" for="input-target-avg" data-i18n="targetAvg">Target Average Price</label>
+        <div class="input-wrapper">
+          <input id="input-target-avg" class="input-field" type="text" inputmode="decimal" placeholder="100.00">
+          <span id="unit-target-avg" class="input-unit">$</span>
+        </div>
+      </div>
+      <div id="reverse-result" class="reverse-result">
+        <div class="reverse-result-row">
+          <span class="detail-label" data-i18n="requiredShares">Shares Needed</span>
+          <span id="reverse-shares" class="detail-value">—</span>
+        </div>
+        <div class="reverse-result-row">
+          <span class="detail-label" data-i18n="requiredInvestment">Investment Needed</span>
+          <span id="reverse-investment" class="detail-value">—</span>
+        </div>
+      </div>
+      <p id="reverse-hint" class="reverse-hint"></p>
+    </div>
+
+    <!-- Scenario Simulator (Premium) -->
+    <div id="simulator-section" class="card simulator-section">
+      <h2 class="card-title" data-i18n="simulatorTitle">Scenario Simulator</h2>
+      <p id="scenario-desc" class="scenario-desc" data-i18n="scenarioDesc">If the price changes, what happens when you buy the same additional shares?</p>
+      <div id="scenario-table" class="scenario-table">
+        <div class="scenario-header">
+          <div data-i18n="scenarioHeaderLabel">Scenario</div>
+          <div data-i18n="currentPrice">Price</div>
+          <div data-i18n="newAvgPrice">Avg</div>
+          <div data-i18n="after">After</div>
+        </div>
+        <div class="scenario-row" id="scenario-row-bear">
+          <div class="scenario-label" data-i18n="scenarioBear">Bear -20%</div>
+          <div class="scenario-price" id="scenario-price-bear">—</div>
+          <div class="scenario-avg" id="scenario-avg-bear">—</div>
+          <div class="scenario-rate" id="scenario-rate-bear">—</div>
+        </div>
+        <div class="scenario-row" id="scenario-row-moderate">
+          <div class="scenario-label" data-i18n="scenarioModerate">Moderate -10%</div>
+          <div class="scenario-price" id="scenario-price-moderate">—</div>
+          <div class="scenario-avg" id="scenario-avg-moderate">—</div>
+          <div class="scenario-rate" id="scenario-rate-moderate">—</div>
+        </div>
+        <div class="scenario-row" id="scenario-row-bull">
+          <div class="scenario-label" data-i18n="scenarioBull">Bull +10%</div>
+          <div class="scenario-price" id="scenario-price-bull">—</div>
+          <div class="scenario-avg" id="scenario-avg-bull">—</div>
+          <div class="scenario-rate" id="scenario-rate-bull">—</div>
+        </div>
+      </div>
+      <p id="scenario-locked-msg" class="scenario-locked-msg" data-i18n="scenarioLocked">Unlock with Pro to compare scenarios</p>
+    </div>
+
     <!-- How to Use -->
     <details class="how-to-use">
       <summary data-i18n="howToUse">How to Use</summary>

@@ -49,5 +49,19 @@
   "renews": "갱신",
   "expires": "만료",
   "autoRenewNotice": "자동 갱신됩니다. 취소하려면 Paddle에서 받은 영수증 이메일을 확인하세요.",
-  "canceledNotice": "취소됨. {date}에 프리미엄이 종료됩니다."
+  "canceledNotice": "취소됨. {date}에 프리미엄이 종료됩니다.",
+  "reverseTitle": "목표 평단가 역산",
+  "targetAvg": "목표 평단가",
+  "requiredShares": "필요 매수 수량",
+  "requiredInvestment": "필요 투자금액",
+  "reverseAlready": "입력하신 가격이 이미 현재 평균단가보다 낮거나 같습니다.",
+  "reverseImpossible": "현재가보다 높아야 합니다.",
+  "reverseInvalid": "올바른 목표가를 입력하세요",
+  "simulatorTitle": "시나리오 시뮬레이터",
+  "scenarioBear": "약세 -20%",
+  "scenarioModerate": "중립 -10%",
+  "scenarioBull": "강세 +10%",
+  "scenarioHeaderLabel": "시나리오",
+  "scenarioDesc": "현재가가 변동했을 때, 같은 수량을 추가 매수하면?",
+  "scenarioLocked": "Pro로 업그레이드하면 시나리오를 비교할 수 있습니다"
 }

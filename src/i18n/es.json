@@ -49,5 +49,19 @@
   "renews": "renueva",
   "expires": "vence",
   "autoRenewNotice": "Se renueva automáticamente. Para cancelar, revise el correo de recibo de Paddle.",
-  "canceledNotice": "Cancelado. Premium termina el {date}."
+  "canceledNotice": "Cancelado. Premium termina el {date}.",
+  "reverseTitle": "Calcular precio objetivo",
+  "targetAvg": "Precio promedio objetivo",
+  "requiredShares": "Acciones necesarias",
+  "requiredInvestment": "Inversión necesaria",
+  "reverseAlready": "El precio objetivo ya es igual o inferior a su promedio actual.",
+  "reverseImpossible": "Debe ser mayor que el precio actual.",
+  "reverseInvalid": "Ingrese un precio objetivo válido",
+  "simulatorTitle": "Simulador de Escenarios",
+  "scenarioBear": "Bajista -20%",
+  "scenarioModerate": "Neutral -10%",
+  "scenarioBull": "Alcista +10%",
+  "scenarioHeaderLabel": "Escenario",
+  "scenarioDesc": "Si el precio cambia, ¿qué pasa al comprar la misma cantidad adicional?",
+  "scenarioLocked": "Desbloquea Pro para comparar escenarios"
 }

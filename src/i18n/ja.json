@@ -49,5 +49,19 @@
   "renews": "更新",
   "expires": "終了",
   "autoRenewNotice": "自動更新されます。キャンセルするにはPaddleからの領収メールをご確認ください。",
-  "canceledNotice": "キャンセル済み。{date}にプレミアムが終了します。"
+  "canceledNotice": "キャンセル済み。{date}にプレミアムが終了します。",
+  "reverseTitle": "目標平均単価の逆算",
+  "targetAvg": "目標平均単価",
+  "requiredShares": "必要な購入数量",
+  "requiredInvestment": "必要な投資金額",
+  "reverseAlready": "入力した価格はすでに現在の平均単価以下です。",
+  "reverseImpossible": "現在価格より高くしてください。",
+  "reverseInvalid": "有効な目標価格を入力してください",
+  "simulatorTitle": "シナリオシミュレーター",
+  "scenarioBear": "弱気 -20%",
+  "scenarioModerate": "中立 -10%",
+  "scenarioBull": "強気 +10%",
+  "scenarioHeaderLabel": "シナリオ",
+  "scenarioDesc": "価格が変動した場合、同じ数量を追加購入するとどうなる？",
+  "scenarioLocked": "Proにアップグレードしてシナリオを比較"
 }

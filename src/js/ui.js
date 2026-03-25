@@ -3,6 +3,8 @@ import {
   currencyConfig,
   calculateWater,
   calculateSliderMax,
+  calculateReverse,
+  scenarioPresets,
   sanitizeInput,
   formatCurrency,
   formatNumber,
@@ -17,6 +19,7 @@ let avgPrice = '';
 let currentPrice = '';
 let quantity = '';
 let additionalQuantity = 0;
+let targetAvg = '';
 let isPremium = false;
 let planType = null;
 let expiresAt = null;
@@ -66,6 +69,21 @@ function cacheElements() {
     syncNotice: getEl('sync-notice'),
     proPanel: getEl('pro-panel'),
     proPanelText: getEl('pro-panel-text'),
+    reverseSection: getEl('reverse-section'),
+    inputTargetAvg: getEl('input-target-avg'),
+    unitTargetAvg: getEl('unit-target-avg'),
+    reverseShares: getEl('reverse-shares'),
+    reverseInvestment: getEl('reverse-investment'),
+    reverseHint: getEl('reverse-hint'),
+    simulatorSection: getEl('simulator-section'),
+    scenarioTable: getEl('scenario-table'),
+    scenarioDesc: getEl('scenario-desc'),
+    scenarioLockedMsg: getEl('scenario-locked-msg'),
+    scenarioCells: {
+      bear: { price: getEl('scenario-price-bear'), avg: getEl('scenario-avg-bear'), rate: getEl('scenario-rate-bear') },
+      moderate: { price: getEl('scenario-price-moderate'), avg: getEl('scenario-avg-moderate'), rate: getEl('scenario-rate-moderate') },
+      bull: { price: getEl('scenario-price-bull'), avg: getEl('scenario-avg-bull'), rate: getEl('scenario-rate-bull') },
+    },
   };
 }
 
@@ -88,6 +106,7 @@ function getCurrentState() {
     currentPrice,
     quantity,
     additionalQuantity,
+    targetAvg,
     currency,
     language: getLanguage(),
   };
@@ -111,10 +130,12 @@ function resetInputs() {
   avgPrice = '';
   currentPrice = '';
   quantity = '';
+  targetAvg = '';
   resetSlider();
   els.inputAvgPrice.value = '';
   els.inputCurrentPrice.value = '';
   els.inputQuantity.value = '';
+  els.inputTargetAvg.value = '';
 }
 
 function updatePremiumUI() {
@@ -173,12 +194,70 @@ function showSyncNotice(failed) {
   }
 }
 
+function updateReverseUI() {
+  const valid = isValid();
+  els.reverseSection.classList.toggle('visible', valid);
+  if (!valid) { els.reverseHint.textContent = ''; return; }
+
+  const target = parseNum(targetAvg);
+  if (!target) {
+    els.reverseShares.textContent = '—';
+    els.reverseInvestment.textContent = '—';
+    els.reverseHint.textContent = '';
+    return;
+  }
+
+  const result = calculateReverse(parseNum(avgPrice), parseNum(currentPrice), parseNum(quantity), target);
+  if (result) {
+    els.reverseShares.textContent = formatNumber(result.requiredShares, (currencyConfig[currency] || currencyConfig.USD).locale) + ' ' + t('shares');
+    els.reverseInvestment.textContent = formatCurrency(result.additionalInvestment, currency);
+    els.reverseHint.textContent = '';
+  } else {
+    els.reverseShares.textContent = '—';
+    els.reverseInvestment.textContent = '—';
+    if (target >= parseNum(avgPrice)) els.reverseHint.textContent = t('reverseAlready');
+    else if (target <= parseNum(currentPrice)) els.reverseHint.textContent = t('reverseImpossible');
+    else els.reverseHint.textContent = t('reverseInvalid');
+  }
+}
+
+function updateSimulatorUI() {
+  const valid = isValid();
+  els.simulatorSection.classList.toggle('visible', valid);
+  if (!valid) return;
+
+  els.scenarioDesc.classList.toggle('visible', isPremium);
+  els.scenarioTable.classList.toggle('visible', isPremium);
+  els.scenarioLockedMsg.classList.toggle('visible', !isPremium);
+
+  if (isPremium) renderScenarios();
+}
+
+function renderScenarios() {
+  const avg = parseNum(avgPrice);
+  const cur = parseNum(currentPrice);
+  const qty = parseNum(quantity);
+
+  scenarioPresets.forEach(preset => {
+    const cells = els.scenarioCells[preset.key];
+    const scenarioPrice = cur * (1 + preset.change);
+    const result = calculateWater(avg, scenarioPrice, qty, additionalQuantity);
+
+    cells.price.textContent = formatCurrency(scenarioPrice, currency);
+    cells.avg.textContent = formatCurrency(result.newAveragePrice, currency);
+    cells.rate.textContent = formatRate(result.afterReturnRate);
+    cells.rate.className = 'scenario-rate ' + (result.afterReturnRate >= 0 ? 'positive' : 'negative');
+  });
+}
+
 function updateUI() {
   const valid = isValid();
   const sliderMax = getSliderMax();
 
   els.sliderSection.classList.toggle('visible', valid);
   els.resultsSection.classList.toggle('visible', valid);
+  updateReverseUI();
+  updateSimulatorUI();
 
   if (!valid) return;
 
@@ -187,9 +266,9 @@ function updateUI() {
 
   if (additionalQuantity > sliderMax) {
     additionalQuantity = sliderMax;
-    els.slider.value = additionalQuantity;
     els.sliderInput.value = additionalQuantity || '';
   }
+  els.slider.value = additionalQuantity;
 
   const result = calculateWater(
     parseNum(avgPrice),
@@ -252,6 +331,13 @@ function bindInputEvents() {
     additionalQuantity = Math.min(val, max);
     els.slider.value = additionalQuantity;
     updateUI();
+    scheduleSave();
+  });
+
+  els.inputTargetAvg.addEventListener('input', (e) => {
+    targetAvg = sanitizeInput(e.target.value, currency);
+    e.target.value = targetAvg;
+    updateReverseUI();
     scheduleSave();
   });
 
@@ -451,6 +537,10 @@ function updateCurrencyUI() {
   els.inputCurrentPrice.inputMode = mode;
 
   els.inputHint.classList.toggle('visible', config.decimals > 0);
+
+  els.unitTargetAvg.textContent = config.symbol;
+  els.inputTargetAvg.placeholder = currency === 'KRW' ? '40000' : currency === 'JPY' ? '12000' : config.placeholder;
+  els.inputTargetAvg.inputMode = mode;
 }
 
 async function init() {
@@ -465,11 +555,14 @@ async function init() {
     additionalQuantity = typeof saved.additionalQuantity === 'number' ? saved.additionalQuantity : 0;
     currency = typeof saved.currency === 'string' && currencyConfig[saved.currency] ? saved.currency : 'USD';
 
+    targetAvg = typeof saved.targetAvg === 'string' ? saved.targetAvg : '';
+
     els.inputAvgPrice.value = avgPrice;
     els.inputCurrentPrice.value = currentPrice;
     els.inputQuantity.value = quantity;
     els.slider.value = additionalQuantity;
     els.sliderInput.value = additionalQuantity || '';
+    els.inputTargetAvg.value = targetAvg;
   }
 
   // Premium check from chrome.storage (cached by background)

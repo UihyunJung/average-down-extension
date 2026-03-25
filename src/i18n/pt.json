@@ -49,5 +49,19 @@
   "renews": "renova",
   "expires": "expira",
   "autoRenewNotice": "Renovação automática. Para cancelar, verifique o e-mail de recibo do Paddle.",
-  "canceledNotice": "Cancelado. Premium termina em {date}."
+  "canceledNotice": "Cancelado. Premium termina em {date}.",
+  "reverseTitle": "Calcular preço-alvo",
+  "targetAvg": "Preço médio-alvo",
+  "requiredShares": "Ações necessárias",
+  "requiredInvestment": "Investimento necessário",
+  "reverseAlready": "O preço-alvo já é igual ou inferior à sua média atual.",
+  "reverseImpossible": "Deve ser maior que o preço atual.",
+  "reverseInvalid": "Insira um preço-alvo válido",
+  "simulatorTitle": "Simulador de Cenários",
+  "scenarioBear": "Baixa -20%",
+  "scenarioModerate": "Neutro -10%",
+  "scenarioBull": "Alta +10%",
+  "scenarioHeaderLabel": "Cenário",
+  "scenarioDesc": "Se o preço mudar, o que acontece ao comprar a mesma quantidade adicional?",
+  "scenarioLocked": "Desbloqueie o Pro para comparar cenários"
 }
