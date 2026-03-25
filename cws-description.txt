@@ -1,0 +1,109 @@
+Stock Average Down Calculator — the fastest way to plan your next stock purchase.
+
+When your stock drops, should you buy more? This calculator instantly shows you the impact of averaging down: your new average price, return rate change, and total investment needed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📊 CORE CALCULATOR (Free)
+
+• Enter your average purchase price, current price, and shares owned
+• Slide to adjust additional shares and see results update in real time
+• View before/after return rates side by side
+• New average price, total shares, total investment, and additional cost — all at a glance
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 TARGET AVERAGE CALCULATOR (Free)
+
+Set your goal. Get the exact number.
+
+"I want my average down to $130 — how many shares do I need?"
+
+Just enter your target average price, and the calculator instantly tells you:
+• Exact number of shares to buy
+• Total investment required
+
+No more guessing with the slider. Plan your purchase with precision.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📋 PORTFOLIO TRACKER (Free: 3 / Pro: Unlimited)
+
+Save your stocks. Track them all in one place.
+
+• Save calculations with a custom name (e.g., "AAPL", "TSLA")
+• See return rates at a glance in the portfolio list
+• Tap to load — instantly restore all values
+• Delete anytime
+• Data persists across sessions
+
+Free users can save up to 3 stocks. Upgrade to Pro for unlimited saves.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📈 SCENARIO SIMULATOR (Pro)
+
+What if the price drops another 20%? What if it bounces 10%?
+
+Compare three scenarios side by side:
+• Bear (-20%) — worst case
+• Moderate (-10%) — likely dip
+• Bull (+10%) — recovery
+
+Each scenario shows the new price, new average, and return rate if you buy the same additional shares at that price. Plan your strategy before committing.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💱 MULTIPLE CURRENCIES (Pro)
+
+Calculate in your local currency:
+• USD ($) — Free
+• KRW (₩), JPY (¥), EUR (€), GBP (£), CNY (¥), INR (₹), BRL (R$) — Pro
+
+Each currency has proper formatting: decimal handling, thousand separators, and locale-specific display.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌍 8 LANGUAGES
+
+English, 한국어, 日本語, 简体中文, 繁體中文, Deutsch, Español, Português
+
+Auto-detects your browser language. Switch anytime from the popup.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🌙 DARK MODE
+
+Follows your system preference automatically. No setup needed.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚡ WHY THIS EXTENSION?
+
+• Instant — no sign-up, no login, no account needed
+• Private — all calculations stay on your device
+• Lightweight — under 50KB, no external scripts
+• Persistent — your inputs and portfolio are saved automatically
+• Clean UI — designed for quick decisions, not clutter
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+💎 FREE vs PRO
+
+FREE:
+✓ Core calculator
+✓ Target average calculator
+✓ Portfolio (up to 3 stocks)
+✓ USD currency
+✓ 8 languages
+✓ Dark mode
+
+PRO ($1.49/mo or $13.49/yr — 25% off):
+✓ Everything in Free
+✓ Scenario simulator
+✓ 7 additional currencies
+✓ Unlimited portfolio saves
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Perfect for retail investors who average down on stocks and want a quick, private, no-nonsense tool to plan their next move.
