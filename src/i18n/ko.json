@@ -17,9 +17,9 @@
   "language": "언어",
   "currency": "통화",
   "upgrade": "Pro 업그레이드",
-  "upgradeDesc": "추가 통화를 사용하세요",
+  "upgradeDesc": "추가 통화 · 시나리오 비교 · 무제한 저장 해금",
   "planMonthly": "월 $1.49",
-  "planAnnual": "연 $12 — 33% 할인",
+  "planAnnual": "연 $13.49 — 25% 할인",
   "premiumRequired": "프리미엄 통화",
   "howToUse": "사용 방법",
   "howToStep1": "평균 매입단가, 현재가, 보유 수량을 입력합니다.",
@@ -63,5 +63,14 @@
   "scenarioBull": "강세 +10%",
   "scenarioHeaderLabel": "시나리오",
   "scenarioDesc": "현재가가 변동했을 때, 같은 수량을 추가 매수하면?",
-  "scenarioLocked": "Pro로 업그레이드하면 시나리오를 비교할 수 있습니다"
+  "scenarioLocked": "Pro로 업그레이드하면 시나리오를 비교할 수 있습니다",
+  "saveStock": "저장",
+  "stockNamePlaceholder": "예: 삼성전자",
+  "saveSuccess": "저장되었습니다!",
+  "saveLimitFree": "무료: 최대 3개. 업그레이드하면 무제한 저장.",
+  "saveNameRequired": "종목 이름을 입력하세요.",
+  "portfolioTitle": "내 종목",
+  "portfolioEmpty": "저장된 종목이 없습니다.",
+  "portfolioToggle": "내 종목",
+  "portfolioLimitLabel": "∞"
 }

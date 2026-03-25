@@ -17,9 +17,9 @@
   "language": "语言",
   "currency": "货币",
   "upgrade": "升级到Pro",
-  "upgradeDesc": "解锁更多货币",
+  "upgradeDesc": "解锁更多货币 · 情景对比 · 无限保存",
   "planMonthly": "$1.49/月",
-  "planAnnual": "$12/年 — 省33%",
+  "planAnnual": "$13.49/年 — 省25%",
   "premiumRequired": "高级货币",
   "howToUse": "使用方法",
   "howToStep1": "输入平均买入价、当前价格和持有数量。",
@@ -63,5 +63,14 @@
   "scenarioBull": "看涨 +10%",
   "scenarioHeaderLabel": "情景",
   "scenarioDesc": "如果价格变动，以相同数量追加买入会怎样？",
-  "scenarioLocked": "升级Pro解锁情景对比"
+  "scenarioLocked": "升级Pro解锁情景对比",
+  "saveStock": "保存",
+  "stockNamePlaceholder": "例: 贵州茅台",
+  "saveSuccess": "已保存！",
+  "saveLimitFree": "免费版：最多3只。升级可无限保存。",
+  "saveNameRequired": "请输入股票名称。",
+  "portfolioTitle": "我的股票",
+  "portfolioEmpty": "暂无保存的股票。",
+  "portfolioToggle": "我的股票",
+  "portfolioLimitLabel": "∞"
 }

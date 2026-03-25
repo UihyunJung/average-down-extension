@@ -17,9 +17,9 @@
   "language": "Idioma",
   "currency": "Moneda",
   "upgrade": "Mejorar a Pro",
-  "upgradeDesc": "Desbloquear monedas adicionales",
+  "upgradeDesc": "Más monedas · comparar escenarios · guardado ilimitado",
   "planMonthly": "$1.49/mes",
-  "planAnnual": "$12/año — Ahorra 33%",
+  "planAnnual": "$13.49/año — Ahorra 25%",
   "premiumRequired": "Moneda premium",
   "howToUse": "Cómo Usar",
   "howToStep1": "Ingrese el precio promedio, el precio actual y las acciones en posesión.",
@@ -63,5 +63,14 @@
   "scenarioBull": "Alcista +10%",
   "scenarioHeaderLabel": "Escenario",
   "scenarioDesc": "Si el precio cambia, ¿qué pasa al comprar la misma cantidad adicional?",
-  "scenarioLocked": "Desbloquea Pro para comparar escenarios"
+  "scenarioLocked": "Desbloquea Pro para comparar escenarios",
+  "saveStock": "Guardar",
+  "stockNamePlaceholder": "ej. AAPL",
+  "saveSuccess": "¡Guardado!",
+  "saveLimitFree": "Gratis: máx. 3. Mejora para guardar sin límite.",
+  "saveNameRequired": "Ingrese el nombre de la acción.",
+  "portfolioTitle": "Mis Acciones",
+  "portfolioEmpty": "No hay acciones guardadas.",
+  "portfolioToggle": "Mis Acciones",
+  "portfolioLimitLabel": "∞"
 }

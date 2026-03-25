@@ -17,9 +17,9 @@
   "language": "言語",
   "currency": "通貨",
   "upgrade": "Proにアップグレード",
-  "upgradeDesc": "追加通貨をご利用いただけます",
+  "upgradeDesc": "追加通貨 · シナリオ比較 · 無制限保存を解放",
   "planMonthly": "月額$1.49",
-  "planAnnual": "年額$12 — 33%オフ",
+  "planAnnual": "年額$13.49 — 25%オフ",
   "premiumRequired": "プレミアム通貨",
   "howToUse": "使い方",
   "howToStep1": "平均取得単価、現在価格、保有数量を入力します。",
@@ -63,5 +63,14 @@
   "scenarioBull": "強気 +10%",
   "scenarioHeaderLabel": "シナリオ",
   "scenarioDesc": "価格が変動した場合、同じ数量を追加購入するとどうなる？",
-  "scenarioLocked": "Proにアップグレードしてシナリオを比較"
+  "scenarioLocked": "Proにアップグレードしてシナリオを比較",
+  "saveStock": "保存",
+  "stockNamePlaceholder": "例: トヨタ",
+  "saveSuccess": "保存しました！",
+  "saveLimitFree": "無料：最大3件。アップグレードで無制限保存。",
+  "saveNameRequired": "銘柄名を入力してください。",
+  "portfolioTitle": "マイ銘柄",
+  "portfolioEmpty": "保存された銘柄はありません。",
+  "portfolioToggle": "マイ銘柄",
+  "portfolioLimitLabel": "∞"
 }

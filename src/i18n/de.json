@@ -17,9 +17,9 @@
   "language": "Sprache",
   "currency": "Währung",
   "upgrade": "Auf Pro upgraden",
-  "upgradeDesc": "Weitere Währungen freischalten",
+  "upgradeDesc": "Mehr Währungen · Szenariovergleich · unbegrenzt speichern",
   "planMonthly": "1,49 $/Monat",
-  "planAnnual": "12 $/Jahr — 33 % sparen",
+  "planAnnual": "13,49 $/Jahr — 25 % sparen",
   "premiumRequired": "Premium-Währung",
   "howToUse": "Anleitung",
   "howToStep1": "Durchschnittspreis, aktuellen Kurs und gehaltene Aktien eingeben.",
@@ -63,5 +63,14 @@
   "scenarioBull": "Bullisch +10%",
   "scenarioHeaderLabel": "Szenario",
   "scenarioDesc": "Wenn sich der Kurs ändert, was passiert beim Kauf der gleichen Anzahl?",
-  "scenarioLocked": "Pro freischalten für Szenariovergleich"
+  "scenarioLocked": "Pro freischalten für Szenariovergleich",
+  "saveStock": "Speichern",
+  "stockNamePlaceholder": "z.B. SAP",
+  "saveSuccess": "Gespeichert!",
+  "saveLimitFree": "Kostenlos: max. 3. Upgraden für unbegrenzt.",
+  "saveNameRequired": "Aktienname eingeben.",
+  "portfolioTitle": "Meine Aktien",
+  "portfolioEmpty": "Keine gespeicherten Aktien.",
+  "portfolioToggle": "Meine Aktien",
+  "portfolioLimitLabel": "∞"
 }

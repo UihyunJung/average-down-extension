@@ -17,9 +17,9 @@
   "language": "語言",
   "currency": "貨幣",
   "upgrade": "升級到Pro",
-  "upgradeDesc": "解鎖更多貨幣",
+  "upgradeDesc": "解鎖更多貨幣 · 情境對比 · 無限儲存",
   "planMonthly": "$1.49/月",
-  "planAnnual": "$12/年 — 省33%",
+  "planAnnual": "$13.49/年 — 省25%",
   "premiumRequired": "進階貨幣",
   "howToUse": "使用方法",
   "howToStep1": "輸入平均買入價、目前價格和持有數量。",
@@ -63,5 +63,14 @@
   "scenarioBull": "看漲 +10%",
   "scenarioHeaderLabel": "情境",
   "scenarioDesc": "如果價格變動，以相同數量追加買入會怎樣？",
-  "scenarioLocked": "升級Pro解鎖情境對比"
+  "scenarioLocked": "升級Pro解鎖情境對比",
+  "saveStock": "儲存",
+  "stockNamePlaceholder": "例: 台積電",
+  "saveSuccess": "已儲存！",
+  "saveLimitFree": "免費版：最多3檔。升級可無限儲存。",
+  "saveNameRequired": "請輸入股票名稱。",
+  "portfolioTitle": "我的股票",
+  "portfolioEmpty": "尚無儲存的股票。",
+  "portfolioToggle": "我的股票",
+  "portfolioLimitLabel": "∞"
 }

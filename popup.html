@@ -35,6 +35,18 @@
         <option value="BRL">BRL (R$) 🔒</option>
       </select>
       <button id="btn-status-badge" class="status-badge status-free" data-i18n="free">Free</button>
+      <button id="btn-portfolio-toggle" class="btn-portfolio-toggle" data-i18n-aria="portfolioToggle" title="My Stocks">📋</button>
+    </div>
+
+    <!-- Portfolio Panel -->
+    <div id="portfolio-panel" class="portfolio-panel">
+      <div class="portfolio-header">
+        <h2 class="card-title" data-i18n="portfolioTitle">My Stocks</h2>
+        <span id="portfolio-count" class="portfolio-count">0/3</span>
+      </div>
+      <div id="portfolio-list" class="portfolio-list">
+        <p id="portfolio-empty" class="portfolio-empty" data-i18n="portfolioEmpty">No saved stocks yet.</p>
+      </div>
     </div>
 
     <!-- Upgrade Panel (toggle by badge click) -->
@@ -75,7 +87,10 @@
     <div class="card">
       <div class="card-header">
         <h2 class="card-title" data-i18n="inputSection">Stock Information</h2>
-        <button id="btn-reset" class="btn-reset"><span class="reset-icon">↻</span> <span data-i18n="reset">Reset</span></button>
+        <div class="card-actions">
+          <button id="btn-reset" class="btn-reset"><span class="reset-icon">↻</span> <span data-i18n="reset">Reset</span></button>
+          <button id="btn-save" class="btn-save" data-i18n="saveStock">Save</button>
+        </div>
       </div>
 
       <div class="input-group">
@@ -103,6 +118,16 @@
           <span id="unit-quantity" class="input-unit" data-i18n="shares">shares</span>
         </div>
       </div>
+
+      <div id="save-section" class="save-section">
+        <input id="input-stock-name" class="input-field" type="text"
+               data-i18n-placeholder="stockNamePlaceholder" placeholder="e.g. AAPL" maxlength="20">
+        <div class="save-buttons">
+          <button id="btn-save-confirm" class="btn-plan btn-plan-primary" data-i18n="confirm">Confirm</button>
+          <button id="btn-save-cancel" class="btn-plan" data-i18n="cancel">Cancel</button>
+        </div>
+      </div>
+      <p id="save-message" class="restore-message"></p>
     </div>
 
     <!-- Slider Section -->

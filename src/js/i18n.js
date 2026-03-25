@@ -59,5 +59,6 @@ export function applyI18n() {
   document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
     const key = el.getAttribute('data-i18n-aria');
     el.setAttribute('aria-label', t(key));
+    if (el.hasAttribute('title')) el.title = t(key);
   });
 }

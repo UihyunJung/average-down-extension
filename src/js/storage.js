@@ -51,3 +51,45 @@ export function flushPendingSave(state) {
     saveState(state);
   }
 }
+
+const PORTFOLIO_KEY = 'avgdown_portfolio';
+
+export async function loadPortfolio() {
+  const storage = getStorage();
+  let data;
+  if (!storage) {
+    try {
+      const raw = localStorage.getItem(PORTFOLIO_KEY);
+      data = raw ? JSON.parse(raw) : [];
+    } catch {
+      data = [];
+    }
+  } else {
+    data = await new Promise((resolve) => {
+      storage.get(PORTFOLIO_KEY, (result) => {
+        resolve(result[PORTFOLIO_KEY] || []);
+      });
+    });
+  }
+
+  if (!Array.isArray(data)) return [];
+  return data.map(item => ({
+    id: item.id || Date.now().toString(36),
+    name: String(item.name || ''),
+    avgPrice: String(item.avgPrice || ''),
+    currentPrice: String(item.currentPrice || ''),
+    quantity: String(item.quantity || ''),
+    targetAvg: String(item.targetAvg ?? ''),
+    currency: String(item.currency || 'USD'),
+    savedAt: item.savedAt || new Date().toISOString(),
+  }));
+}
+
+export function savePortfolio(portfolio) {
+  const storage = getStorage();
+  if (!storage) {
+    localStorage.setItem(PORTFOLIO_KEY, JSON.stringify(portfolio));
+    return;
+  }
+  storage.set({ [PORTFOLIO_KEY]: portfolio });
+}

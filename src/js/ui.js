@@ -10,7 +10,7 @@ import {
   formatNumber,
   formatRate,
 } from './calculator.js';
-import { loadState, debouncedSave, flushPendingSave, saveState } from './storage.js';
+import { loadState, debouncedSave, flushPendingSave, saveState, loadPortfolio, savePortfolio } from './storage.js';
 import { checkPremium, openCheckout, restorePurchase, refreshStatus } from './subscription.js';
 
 // State
@@ -20,6 +20,7 @@ let currentPrice = '';
 let quantity = '';
 let additionalQuantity = 0;
 let targetAvg = '';
+let portfolio = [];
 let isPremium = false;
 let planType = null;
 let expiresAt = null;
@@ -84,6 +85,17 @@ function cacheElements() {
       moderate: { price: getEl('scenario-price-moderate'), avg: getEl('scenario-avg-moderate'), rate: getEl('scenario-rate-moderate') },
       bull: { price: getEl('scenario-price-bull'), avg: getEl('scenario-avg-bull'), rate: getEl('scenario-rate-bull') },
     },
+    btnSave: getEl('btn-save'),
+    saveSection: getEl('save-section'),
+    inputStockName: getEl('input-stock-name'),
+    btnSaveConfirm: getEl('btn-save-confirm'),
+    btnSaveCancel: getEl('btn-save-cancel'),
+    saveMessage: getEl('save-message'),
+    btnPortfolioToggle: getEl('btn-portfolio-toggle'),
+    portfolioPanel: getEl('portfolio-panel'),
+    portfolioList: getEl('portfolio-list'),
+    portfolioEmpty: getEl('portfolio-empty'),
+    portfolioCount: getEl('portfolio-count'),
   };
 }
 
@@ -511,6 +523,165 @@ function bindInputEvents() {
       }
     });
   });
+
+  // Portfolio: save button
+  els.btnSave.addEventListener('click', () => {
+    if (!isValid()) return;
+    els.saveSection.classList.toggle('visible');
+    if (els.saveSection.classList.contains('visible')) {
+      els.inputStockName.value = '';
+      els.inputStockName.focus();
+    }
+    els.saveMessage.textContent = '';
+  });
+
+  // Portfolio: save confirm
+  els.btnSaveConfirm.addEventListener('click', () => {
+    const name = els.inputStockName.value.trim();
+    if (!name) {
+      els.saveMessage.textContent = t('saveNameRequired');
+      els.saveMessage.className = 'restore-message error';
+      return;
+    }
+
+    if (!isPremium && portfolio.length >= 3) {
+      els.saveMessage.textContent = t('saveLimitFree');
+      els.saveMessage.className = 'restore-message error';
+      els.saveSection.classList.remove('visible');
+      els.upgradePanel.classList.add('visible');
+      return;
+    }
+
+    portfolio.push({
+      id: Date.now().toString(36),
+      name,
+      avgPrice,
+      currentPrice,
+      quantity,
+      targetAvg,
+      currency,
+      savedAt: new Date().toISOString(),
+    });
+    savePortfolio(portfolio);
+
+    els.saveSection.classList.remove('visible');
+    els.saveMessage.textContent = t('saveSuccess');
+    els.saveMessage.className = 'restore-message success';
+    setTimeout(() => { els.saveMessage.textContent = ''; }, 2000);
+    renderPortfolioList();
+  });
+
+  // Portfolio: save cancel
+  els.btnSaveCancel.addEventListener('click', () => {
+    els.saveSection.classList.remove('visible');
+    els.saveMessage.textContent = '';
+  });
+
+  // Portfolio: toggle panel
+  els.btnPortfolioToggle.addEventListener('click', () => {
+    els.portfolioPanel.classList.toggle('visible');
+    if (els.portfolioPanel.classList.contains('visible')) renderPortfolioList();
+  });
+
+  // Portfolio: event delegation for load/delete
+  els.portfolioList.addEventListener('click', (e) => {
+    const deleteBtn = e.target.closest('.btn-delete-item');
+    if (deleteBtn) {
+      const id = deleteBtn.dataset.id;
+      const idx = portfolio.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        portfolio.splice(idx, 1);
+        savePortfolio(portfolio);
+        renderPortfolioList();
+      }
+      return;
+    }
+
+    const item = e.target.closest('.portfolio-item');
+    if (item) {
+      const id = item.dataset.id;
+      const entry = portfolio.find(p => p.id === id);
+      if (!entry) return;
+
+      // Premium currency check
+      let loadCurrency = entry.currency;
+      if (currencyConfig[loadCurrency]?.premium && !isPremium) {
+        loadCurrency = 'USD';
+      }
+
+      currency = loadCurrency;
+      avgPrice = entry.avgPrice;
+      currentPrice = entry.currentPrice;
+      quantity = entry.quantity;
+      targetAvg = entry.targetAvg || '';
+      resetSlider();
+
+      els.currencySelect.value = currency;
+      els.inputAvgPrice.value = avgPrice;
+      els.inputCurrentPrice.value = currentPrice;
+      els.inputQuantity.value = quantity;
+      els.inputTargetAvg.value = targetAvg;
+
+      updateCurrencyUI();
+      updateUI();
+      immediateSave();
+
+      els.portfolioPanel.classList.remove('visible');
+    }
+  });
+}
+
+function renderPortfolioList() {
+  const maxLabel = isPremium ? t('portfolioLimitLabel') : '3';
+  els.portfolioCount.textContent = portfolio.length + '/' + maxLabel;
+
+  if (portfolio.length === 0) {
+    const empty = document.createElement('p');
+    empty.className = 'portfolio-empty';
+    empty.textContent = t('portfolioEmpty');
+    els.portfolioList.replaceChildren(empty);
+    return;
+  }
+
+  const items = portfolio.map(entry => {
+    const div = document.createElement('div');
+    div.className = 'portfolio-item';
+    div.dataset.id = entry.id;
+
+    const info = document.createElement('div');
+    info.className = 'portfolio-item-info';
+
+    const nameEl = document.createElement('div');
+    nameEl.className = 'portfolio-item-name';
+    nameEl.textContent = entry.name;
+
+    const detailEl = document.createElement('div');
+    detailEl.className = 'portfolio-item-detail';
+    const config = currencyConfig[entry.currency] || currencyConfig.USD;
+    detailEl.textContent = entry.currency + ' · ' + config.symbol + entry.avgPrice;
+
+    info.appendChild(nameEl);
+    info.appendChild(detailEl);
+
+    const avg = parseNum(entry.avgPrice);
+    const cur = parseNum(entry.currentPrice);
+    const rate = avg > 0 ? ((cur - avg) / avg) * 100 : 0;
+    const rateEl = document.createElement('div');
+    rateEl.className = 'portfolio-item-rate ' + (rate >= 0 ? 'positive' : 'negative');
+    rateEl.textContent = formatRate(rate);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn-delete-item';
+    deleteBtn.dataset.id = entry.id;
+    deleteBtn.textContent = '✕';
+
+    div.appendChild(info);
+    div.appendChild(rateEl);
+    div.appendChild(deleteBtn);
+    return div;
+  });
+
+  els.portfolioList.replaceChildren(...items);
 }
 
 function updateCurrencyDropdown() {
@@ -564,6 +735,9 @@ async function init() {
     els.sliderInput.value = additionalQuantity || '';
     els.inputTargetAvg.value = targetAvg;
   }
+
+  // Load portfolio
+  portfolio = await loadPortfolio();
 
   // Premium check from chrome.storage (cached by background)
   isPremium = await checkPremium();

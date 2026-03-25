@@ -17,9 +17,9 @@
   "language": "Idioma",
   "currency": "Moeda",
   "upgrade": "Atualizar para Pro",
-  "upgradeDesc": "Desbloquear moedas adicionais",
+  "upgradeDesc": "Mais moedas · comparar cenários · salvamento ilimitado",
   "planMonthly": "$1,49/mês",
-  "planAnnual": "$12/ano — Economize 33%",
+  "planAnnual": "$13.49/ano — Economize 25%",
   "premiumRequired": "Moeda premium",
   "howToUse": "Como Usar",
   "howToStep1": "Insira o preço médio, o preço atual e as ações em carteira.",
@@ -63,5 +63,14 @@
   "scenarioBull": "Alta +10%",
   "scenarioHeaderLabel": "Cenário",
   "scenarioDesc": "Se o preço mudar, o que acontece ao comprar a mesma quantidade adicional?",
-  "scenarioLocked": "Desbloqueie o Pro para comparar cenários"
+  "scenarioLocked": "Desbloqueie o Pro para comparar cenários",
+  "saveStock": "Salvar",
+  "stockNamePlaceholder": "ex. PETR4",
+  "saveSuccess": "Salvo!",
+  "saveLimitFree": "Grátis: máx. 3. Atualize para salvar ilimitado.",
+  "saveNameRequired": "Insira o nome da ação.",
+  "portfolioTitle": "Minhas Ações",
+  "portfolioEmpty": "Nenhuma ação salva.",
+  "portfolioToggle": "Minhas Ações",
+  "portfolioLimitLabel": "∞"
 }

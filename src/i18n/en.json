@@ -17,9 +17,9 @@
   "language": "Language",
   "currency": "Currency",
   "upgrade": "Upgrade to Pro",
-  "upgradeDesc": "Unlock additional currencies",
+  "upgradeDesc": "Unlock more currencies · scenario comparison · unlimited saves",
   "planMonthly": "$1.49/mo",
-  "planAnnual": "$12/yr — Save 33%",
+  "planAnnual": "$13.49/yr — Save 25%",
   "premiumRequired": "Premium currency",
   "howToUse": "How to Use",
   "howToStep1": "Enter average price, current price, and shares owned.",
@@ -63,5 +63,14 @@
   "scenarioBull": "Bull +10%",
   "scenarioHeaderLabel": "Scenario",
   "scenarioDesc": "If the price changes, what happens when you buy the same additional shares?",
-  "scenarioLocked": "Unlock with Pro to compare scenarios"
+  "scenarioLocked": "Unlock with Pro to compare scenarios",
+  "saveStock": "Save",
+  "stockNamePlaceholder": "e.g. AAPL",
+  "saveSuccess": "Saved!",
+  "saveLimitFree": "Free plan: 3 stocks max. Upgrade to save more.",
+  "saveNameRequired": "Enter a stock name.",
+  "portfolioTitle": "My Stocks",
+  "portfolioEmpty": "No saved stocks yet.",
+  "portfolioToggle": "My Stocks",
+  "portfolioLimitLabel": "∞"
 }
