@@ -1,6 +1,6 @@
 # Privacy Policy — Stock Average Down Calculator
 
-**Last updated**: March 20, 2026
+**Last updated**: June 12, 2026
 
 ## Data Collection
 
@@ -13,6 +13,7 @@ This extension collects minimal data required for the premium subscription servi
 
 The extension uses Chrome's `chrome.storage.local` API to save:
 - Input values (average price, current price, shares owned)
+- Saved portfolio entries (stock names and price inputs you choose to save)
 - Preferences (language, currency)
 - Subscription status (cached locally for offline use)
 

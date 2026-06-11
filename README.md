@@ -6,9 +6,11 @@ Chrome 확장 프로그램 — 주식 물타기(평균단가 낮추기) 계산�
 
 - 평균 매입단가, 현재가, 보유수량 입력 → 추가 매수 시 새 평균단가/수익률 계산
 - 슬라이더로 추가 매수 수량 조절
+- 목표 평단가 역산 계산기 (목표 평단가 → 필요 수량/투자금)
+- 포트폴리오 저장 (무료 3개 / Pro 무제한)
 - 다국어 지원 (EN, KO, JA, ZH-CN, ZH-TW, DE, ES, PT)
 - 다크모드 자동 지원
-- Pro 구독: 추가 통화 (KRW, JPY, EUR, GBP, CNY, INR, BRL) 잠금 해제
+- Pro 구독: 추가 통화 (KRW, JPY, EUR, GBP, CNY, INR, BRL), 시나리오 시뮬레이터, 무제한 포트폴리오
 
 ## Tech Stack
 
@@ -44,7 +46,7 @@ src/
   css/
     styles.css          # 스타일 (라이트/다크)
   i18n/
-    en.json, ko.json, ja.json
+    en.json 외 8개 언어
 public/
   manifest.json
   icons/
