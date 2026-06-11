@@ -26,7 +26,7 @@ export async function openCheckout(plan = 'monthly') {
   if (!res.ok) throw new Error('Failed to create checkout');
 
   const data = await res.json();
-  if (data.checkoutUrl) {
+  if (typeof data.checkoutUrl === 'string' && data.checkoutUrl.startsWith('https://')) {
     chrome.tabs.create({ url: data.checkoutUrl });
   } else {
     throw new Error('No checkout URL returned');
@@ -51,15 +51,20 @@ export async function restorePurchase(email) {
 
   const data = await res.json();
   if (data.restored) {
-    await refreshStatus();
+    await refreshStatus(true);
   }
   return data;
 }
 
 // background에 즉시 상태 체크 요청 (결제 직후 사용)
-export async function refreshStatus() {
+// force=true: 백그라운드의 5분 캐시를 우회 (Verify/Restore 등 사용자 명시 요청)
+export async function refreshStatus(force = false) {
   return new Promise((resolve) => {
-    chrome.runtime.sendMessage({ type: 'check-status' }, (response) => {
+    chrome.runtime.sendMessage({ type: 'check-status', force }, (response) => {
+      if (chrome.runtime.lastError) {
+        resolve({ premium: false, planType: null, expiresAt: null, status: null });
+        return;
+      }
       resolve({
         premium: response?.premium ?? false,
         planType: response?.planType ?? null,

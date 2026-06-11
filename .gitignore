@@ -7,3 +7,4 @@ stripe_backup_code*
 .playwright-mcp/
 screenshots/
 *.zip
+*.stackdump

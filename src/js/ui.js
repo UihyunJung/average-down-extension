@@ -391,11 +391,16 @@ function bindInputEvents() {
 
   // Plan buttons → open checkout
   async function handleCheckout(plan) {
+    els.btnMonthly.disabled = true;
+    els.btnAnnual.disabled = true;
     try {
       await openCheckout(plan);
     } catch {
       els.upgradeMessage.textContent = t('checkoutError');
       els.upgradeMessage.className = 'restore-message error';
+    } finally {
+      els.btnMonthly.disabled = false;
+      els.btnAnnual.disabled = false;
     }
   }
   els.btnMonthly.addEventListener('click', () => handleCheckout('monthly'));
@@ -408,7 +413,7 @@ function bindInputEvents() {
     els.restoreSection.classList.remove('visible');
     els.btnVerify.textContent = t('verifying');
     try {
-      const result = await refreshStatus();
+      const result = await refreshStatus(true);
       isPremium = result.premium;
       planType = result.planType;
       expiresAt = result.expiresAt;
@@ -481,7 +486,8 @@ function bindInputEvents() {
   });
 
   // Storage change listener — background updates premium
-  chrome.storage.onChanged.addListener((changes) => {
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== 'local') return;
     if (changes.avgdown_premium) {
       isPremium = changes.avgdown_premium.newValue === true;
     }

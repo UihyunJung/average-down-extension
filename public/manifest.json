@@ -3,12 +3,12 @@
   "name": "__MSG_extName__",
   "description": "__MSG_extDescription__",
   "default_locale": "en",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "action": {
     "default_popup": "popup.html"
   },
   "permissions": ["storage", "alarms"],
-  "host_permissions": ["https://*.vercel.app/*"],
+  "host_permissions": ["https://paddle-extensions-backend.vercel.app/*"],
   "background": {
     "service_worker": "background.js",
     "type": "module"

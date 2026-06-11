@@ -29,7 +29,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 // === 메시지 리스너: 팝업에서 즉시 상태 확인 요청 ===
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg.type === 'check-status') {
-    checkStatus().then(async () => {
+    checkStatus(msg.force === true).then(async () => {
       const { avgdown_premium, avgdown_plan_type, avgdown_expires_at, avgdown_sub_status } =
         await chrome.storage.local.get(['avgdown_premium', 'avgdown_plan_type', 'avgdown_expires_at', 'avgdown_sub_status']);
       sendResponse({ premium: avgdown_premium, planType: avgdown_plan_type, expiresAt: avgdown_expires_at, status: avgdown_sub_status });

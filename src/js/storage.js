@@ -73,8 +73,8 @@ export async function loadPortfolio() {
   }
 
   if (!Array.isArray(data)) return [];
-  return data.map(item => ({
-    id: item.id || Date.now().toString(36),
+  return data.map((item, index) => ({
+    id: item.id || Date.now().toString(36) + '-' + index,
     name: String(item.name || ''),
     avgPrice: String(item.avgPrice || ''),
     currentPrice: String(item.currentPrice || ''),
