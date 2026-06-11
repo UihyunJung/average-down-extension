@@ -3,6 +3,6 @@
     "message": "Aktien-Nachkauf-Rechner"
   },
   "extDescription": {
-    "message": "Aktien-Nachkauf-Rechner (Averaging Down). Berechnet sofort den neuen Durchschnittspreis, die Renditeänderung und die Gesamtinvestition."
+    "message": "Neuen durchschnittlichen Kaufkurs beim Nachkaufen berechnen. DCA-Einstandsrechner mit Mehrwährungsunterstützung und Renditeanalyse."
   }
 }

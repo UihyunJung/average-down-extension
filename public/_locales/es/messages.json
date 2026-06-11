@@ -3,6 +3,6 @@
     "message": "Calculadora de Promedio a la Baja"
   },
   "extDescription": {
-    "message": "Calculadora de promedio a la baja para acciones. Calcula al instante el nuevo precio promedio, cambio de rentabilidad e inversión total."
+    "message": "Calcula el nuevo precio promedio al promediar a la baja. Calculadora DCA de costo base con multidivisa y análisis de rentabilidad."
   }
 }
