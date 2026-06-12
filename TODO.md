@@ -16,9 +16,9 @@ Paddle Billing v2 기반 프리미엄 구독 — 프로덕션 라이브 완료.
 - [x] 백엔드 Phase 1 배포 (planType/expiresAt/status + adjustment.updated 환불 처리)
 - [x] Sandbox E2E 테스트 (결제 → 뱃지 확인 → 취소 → 복원)
 - [x] CWS v1.1.0 제출
+- [x] CWS v1.2.3 심사 통과·게시 (2026-06-13 — 보안 리뷰 수정 + host_permissions 축소 + 메타데이터 정렬)
 
 ### 남은 작업
-- [ ] CWS v1.2.3 심사 통과·게시 확인 (2026-06-12 제출 — 보안 리뷰 수정 + 메타데이터 정렬)
 - [ ] Payoneer 계정 승인 확인 + Paddle payout 연결
 
 ## 기타 개선 사항
